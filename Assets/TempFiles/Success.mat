@@ -23,8 +23,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 195ce653b4a324145be40fe8d0e78ff3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4455f07c08ae5d740b3e505481ca60fd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
@@ -34,6 +38,7 @@ Material:
     m_Floats:
     - PixelSnap: 0
     - _CurFrame: 4
+    - _Cutoff: 0.5
     - _EnableExternalAlpha: 0
     - _Frames: 2
     - _FramesX: 3
@@ -42,9 +47,11 @@ Material:
     - _Speed: 300
     - _TexCoordScrollX: 24
     - _TexCoordScrollY: 0
+    - _WindQuality: 0
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _HueVariation: {r: 1, g: 0.5, b: 0, a: 0.1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _TintColor: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.5019608}
   m_BuildTextureStacks: []
