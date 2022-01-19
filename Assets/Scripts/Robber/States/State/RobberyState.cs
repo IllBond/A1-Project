@@ -37,7 +37,7 @@ public class RobberyState : State
 
                     
             val = Mathf.Round(character.roberryPathFinder.movePositionHouse.upg_zabor_or_signalization ?
-                character.factorPropertyperSecodn / (Metric.Instance.isOnMetric ? Metric.Instance.signalizationValue.GetComponent<MetricaVal>().value : 1.5f) :
+                character.factorPropertyperSecodn / (Metric.Instance.isOnMetric ? Metric.Instance.signalizationValue.GetComponent<MetricaVal>().value : 1.3f) :
                 character.factorPropertyperSecodn);
 
             time = Mathf.Round(character.roberryPathFinder.movePositionHouse.Property / val);

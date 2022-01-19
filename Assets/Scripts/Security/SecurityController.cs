@@ -37,7 +37,7 @@ public class SecurityController : MonoBehaviour
     public PlayerCar.PlayerCarSelector _playerCarSelector;
 
 
-    public float timeToArest = 4;
+    public float timeToArest = 5;
     public float timeToArestUP = 0;
     public bool bestRoad;
     public bool autoPilot;
@@ -172,7 +172,7 @@ public class SecurityController : MonoBehaviour
 
     public void SpeedUp()
     {
-        pathMover._speed += Metric.Instance.isOnMetric ? Metric.Instance.speedAfterUpdate.GetComponent<MetricaVal>().value : 1;
+        pathMover._speed += Metric.Instance.isOnMetric ? Metric.Instance.speedAfterUpdate.GetComponent<MetricaVal>().value : 0.3f;
        // Debug.Log("Скорость увеличена до " + pathMover._speed);
         
     }  
@@ -180,7 +180,7 @@ public class SecurityController : MonoBehaviour
     public void ArestSpeed()
     {
         //timeToArest -= Metric.Instance.isOnMetric ? Metric.Instance.valuePowerSecurity.GetComponent<MetricaVal>().value : 1; ;
-        timeToArestUP = Metric.Instance.isOnMetric ? Metric.Instance.valuePowerSecurity.GetComponent<MetricaVal>().value : 1; ;
+        timeToArestUP = Metric.Instance.isOnMetric ? Metric.Instance.valuePowerSecurity.GetComponent<MetricaVal>().value : 0.5f; ;
 
         // Debug.Log("Время ареста уменьшено до " + timeToArest);
     } 

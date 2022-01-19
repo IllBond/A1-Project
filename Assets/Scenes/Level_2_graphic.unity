@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657785, g: 0.4964131, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657785, g: 0.4964131, b: 0.5748177, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -668,6 +668,7 @@ MonoBehaviour:
   ConstrainPosition: 1
   MinPosition: {x: -76.54, y: 0, z: -19.2}
   MaxPosition: {x: 80, y: 0, z: 113.3}
+  _scrollSpeed: 5
 --- !u!4 &1205919813
 Transform:
   m_ObjectHideFlags: 0
@@ -796,6 +797,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buildRacurs: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
   _isSwitch: 1
+  _isFirstCLock: 0
   SwichSpeed: 2
   ButtonBuildMode: {fileID: 0}
   ButtonViewMode: {fileID: 0}

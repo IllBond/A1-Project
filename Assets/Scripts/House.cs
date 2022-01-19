@@ -53,7 +53,7 @@ public class House : MonoBehaviour
     [SerializeField] public bool securityProtected; // Под защитой
     [SerializeField] public bool moveProtected = true; // Под защитой
     private float _property; // Текущее значение имущества
-    [SerializeField] private float _maxProperty = 100; // Максимально количество имузества (для сброса по умолчанию, его так же можно увеличивать)
+    [SerializeField] private float _maxProperty = 150; // Максимально количество имузества (для сброса по умолчанию, его так же можно увеличивать)
 
     public event Action OnCompleteRobbir; // Если ограбление заканчивается
 
@@ -208,7 +208,7 @@ public class House : MonoBehaviour
     }
 
     private bool UpgradeTime() {
-        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSignal.GetComponent<MetricaVal>().value : 50);
+        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSignal.GetComponent<MetricaVal>().value : 100);
 
         if (MainPlayer.Instance.Money - price >= 0)
         {
@@ -234,7 +234,7 @@ public class House : MonoBehaviour
         }
         else {
 
-            MainPlayer.Instance.ShowMessage("Не хватает денег");
+            MainPlayer.Instance.ShowMessage("Не хватает денег. Нужно " + price);
             return false;
         }
     }
@@ -254,7 +254,7 @@ public class House : MonoBehaviour
 
 
     private bool UpgradeCamera() {
-        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateCamera.GetComponent<MetricaVal>().value : 100);
+        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateCamera.GetComponent<MetricaVal>().value : 150);
 
         if (MainPlayer.Instance.Money - price >= 0)
         {
@@ -267,7 +267,7 @@ public class House : MonoBehaviour
         }
         else
         {
-            MainPlayer.Instance.ShowMessage("Не хватает денег");
+            MainPlayer.Instance.ShowMessage("Не хватает денег. Нужно " + price);
             return false;
         }
     }
@@ -342,11 +342,11 @@ public class House : MonoBehaviour
         //Тут считаем очки, прибавляем или отнимаем и сколько
         //Debug.Log("Ограбление предотвращено");
         /* MainPlayer.Instance.HouseState = "Ограбление предотвращено =)";*/
-        MainPlayer.Instance.Raiting = Metric.Instance.isOnMetric ? Metric.Instance.expAfterProtect.GetComponent<MetricaVal>().value : 50; ;
+        MainPlayer.Instance.Raiting = Metric.Instance.isOnMetric ? Metric.Instance.expAfterProtect.GetComponent<MetricaVal>().value : 150;
 
 
         AddScoreToBase();
-        MainPlayer.Instance.Money = Metric.Instance.isOnMetric ? Metric.Instance.moneyAfterProtect.GetComponent<MetricaVal>().value : 50; ;
+        MainPlayer.Instance.Money = Metric.Instance.isOnMetric ? Metric.Instance.moneyAfterProtect.GetComponent<MetricaVal>().value : 50;
         TargetsManager.Instance.countUpdate++;
         if (TargetsManager.Instance.countUpdate >= 20)
         {
@@ -363,11 +363,14 @@ public class House : MonoBehaviour
         EndRobbery();
         /*      MainPlayer.Instance.HouseState = "ОГРАБИЛИ =(";*/
 
-        float c = (Metric.Instance.isOnMetric ? -Metric.Instance.expBeforRob.GetComponent<MetricaVal>().value : -50) / (Metric.Instance.isOnMetric ? Metric.Instance.cameraValue.GetComponent<MetricaVal>().value : 2);
-        float v = (Metric.Instance.isOnMetric ? -Metric.Instance.moneyAfterRob.GetComponent<MetricaVal>().value : -50) / (Metric.Instance.isOnMetric ? Metric.Instance.cameraValue.GetComponent<MetricaVal>().value : 2);
 
-        MainPlayer.Instance.Raiting = upg_camera ? c : Metric.Instance.isOnMetric ? -Metric.Instance.expBeforRob.GetComponent<MetricaVal>().value : -50; 
-        MainPlayer.Instance.Money = upg_camera ? v : Metric.Instance.isOnMetric ? -Metric.Instance.moneyAfterRob.GetComponent<MetricaVal>().value : -50;
+        // Сколько денег/опыта забереут если енсть камер
+        float c = (Metric.Instance.isOnMetric ? -Metric.Instance.expBeforRob.GetComponent<MetricaVal>().value : -100) / (Metric.Instance.isOnMetric ? Metric.Instance.cameraValue.GetComponent<MetricaVal>().value : 2);
+        float v = (Metric.Instance.isOnMetric ? -Metric.Instance.moneyAfterRob.GetComponent<MetricaVal>().value : -150) / (Metric.Instance.isOnMetric ? Metric.Instance.cameraValue.GetComponent<MetricaVal>().value : 2);
+
+        // Сколько денег/опыта забереут
+        MainPlayer.Instance.Raiting = upg_camera ? c : Metric.Instance.isOnMetric ? -Metric.Instance.expBeforRob.GetComponent<MetricaVal>().value : -100; 
+        MainPlayer.Instance.Money = upg_camera ? v : Metric.Instance.isOnMetric ? -Metric.Instance.moneyAfterRob.GetComponent<MetricaVal>().value : -150;
         
         TargetsManager.Instance.countUpdate = 0;
         SaveLoadController.SaveOut();

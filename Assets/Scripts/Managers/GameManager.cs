@@ -10,7 +10,7 @@ public class GameManager : SceneSingleton<GameManager>
     //public int carsCount;
     public int maxCarsRob = 5;
     
-    [SerializeField] private float _spawnInterval;
+    [SerializeField] private float _spawnInterval = 23;
     [SerializeField] private Factory Factory;
     public int currentCarsCount;
     public int timeToStartGame = 5;

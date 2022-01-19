@@ -44,7 +44,7 @@ public class MovingState : State
             character.factorPropertyperSecodn);
 */
         val = Mathf.Round(character.roberryPathFinder.movePositionHouse.upg_zabor_or_signalization ?
-    character.factorPropertyperSecodn / (Metric.Instance.isOnMetric ? Metric.Instance.signalizationValue.GetComponent<MetricaVal>().value : 1.5f) :
+    character.factorPropertyperSecodn / (Metric.Instance.isOnMetric ? Metric.Instance.signalizationValue.GetComponent<MetricaVal>().value : 1.3f) :
     character.factorPropertyperSecodn);
 
 

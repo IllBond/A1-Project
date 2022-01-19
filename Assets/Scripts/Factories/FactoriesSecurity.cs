@@ -133,7 +133,8 @@ public class FactoriesSecurity : MonoBehaviour
         }
         else
         {
-            MainPlayer.Instance.ShowMessage("Не хватает денег");
+   
+            MainPlayer.Instance.ShowMessage("Не хватает денег. Нужно " + price);
             // Debug.Log("Не хватает денег");ShowMessage
             return false;
         }
@@ -150,7 +151,7 @@ public class FactoriesSecurity : MonoBehaviour
     }
 
     private bool UpgradeMoreCar() {
-        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 1000) ;
+        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240) ;
         string name = "Больше машин" ;
 
         bool result = Upgrader(price, name);
@@ -163,7 +164,7 @@ public class FactoriesSecurity : MonoBehaviour
     }    
     
     private bool UpgradeTeach() {
-        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 1000);
+        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240);
         string name = "Обучение сотрудников" ;
 
         bool result = Upgrader(price, name);
@@ -172,7 +173,7 @@ public class FactoriesSecurity : MonoBehaviour
     }   
     
     private bool UpgradePower() {
-        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 1000);
+        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240);
         string name = "Сила сотрудников" ;
 
         bool result = Upgrader(price, name);
@@ -181,7 +182,7 @@ public class FactoriesSecurity : MonoBehaviour
     }  
     
     private bool UpgradeTablet() {
-        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 1000);
+        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240);
         string name = "Планшет" ;
 
         bool result = Upgrader(price, name);
@@ -190,16 +191,17 @@ public class FactoriesSecurity : MonoBehaviour
     }    
     
     private bool UpgradeRadio() {
-        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 1000);
+        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240);
         string name = "Рация" ;
 
         bool result = Upgrader(price, name);
+        Debug.Log(price);
         if (result) upg_radio = true;
         return result;
     }    
     
     private bool UpgradeFleshers() {
-        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 1000);
+        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240);
         string name = "Мигалки" ;
 
         bool result = Upgrader(price, name);

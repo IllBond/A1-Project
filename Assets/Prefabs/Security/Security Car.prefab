@@ -10013,7 +10013,8 @@ MonoBehaviour:
   pathCreator: {fileID: 0}
   pathMover: {fileID: 0}
   _playerCarSelector: {fileID: 0}
-  timeToArest: 4
+  timeToArest: 5
+  timeToArestUP: 0
   bestRoad: 0
   autoPilot: 0
   isStoped: 0
@@ -10065,8 +10066,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b5ea1270b8434b98940d796d21238d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 3.7
   _pathCreator: {fileID: 8451824443242455519}
+  _navMeshAgent: {fileID: 0}
 --- !u!120 &7177346951771354400
 LineRenderer:
   m_ObjectHideFlags: 0
