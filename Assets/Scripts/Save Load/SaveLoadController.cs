@@ -8,7 +8,8 @@ public class SaveLoadController : MonoBehaviour
     [Header("Пример - save.gamesave")]
     [SerializeField] private SaveGameData _data;
     public SaveGameData Data => _data;
-    public static string loadName = "save.gamesave";
+    public string baseLoadNamel = "save.gamesaveone";
+    [SerializeField] private static string loadName ;
 
     private static MainPlayer mainPlayer;
     private static TargetsManager targetsManager;
@@ -28,7 +29,11 @@ public class SaveLoadController : MonoBehaviour
                 SaveGame();
             }
         }*/
-
+    private void Awake()
+    {
+        loadName = baseLoadNamel;
+        Debug.Log(loadName);
+    }
     public static void SaveOut() {
         SaveGame();
     }

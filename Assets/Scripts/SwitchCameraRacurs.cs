@@ -81,6 +81,7 @@ public class SwitchCameraRacurs : MonoBehaviour
                 _isSwitch = false;
                 if (_isFirstCLock)
                 {
+                    Time.timeScale = 1;
                     Time.timeScale = 0;
                 }
                 Debug.Log("Останавливаем в build mode");
