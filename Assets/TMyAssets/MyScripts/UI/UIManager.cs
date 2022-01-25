@@ -138,15 +138,16 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
-    private IEnumerator LoadSceneCoroutine(string sceneName)
+/*    private IEnumerator LoadSceneCoroutine(string sceneName)
     {
        // _blackScreenFade.FadeIn();
         yield return new WaitForSeconds(0.2f);
-        SceneManager.LoadScene(sceneName);
-    }
+        
+    }*/
 
     public void LoadScene(string sceneName)
     {
-        StartCoroutine(LoadSceneCoroutine(sceneName));
+        //StartCoroutine(LoadSceneCoroutine(sceneName));
+        SceneManager.LoadScene(sceneName);
     }
 }
