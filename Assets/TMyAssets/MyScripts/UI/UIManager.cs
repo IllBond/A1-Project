@@ -28,6 +28,13 @@ public class UIManager : MonoBehaviour
 
     private AchievenmentListIngame _achievementListInGame;
     private BlackScreenFade _blackScreenFade;
+    private string[] t = { "load", "load.", "load..", "load..." };
+    private int tNum;
+
+    private AsyncOperation level;
+
+    [SerializeField] private GameObject load;
+    [SerializeField] private Text loadText;
 
     private void Awake()
     {
@@ -145,9 +152,45 @@ public class UIManager : MonoBehaviour
         
     }*/
 
+    private IEnumerator LoadAnim()
+    {
+        while (true)
+        {
+            Debug.Log("Остановочка");
+            loadText.text = t[tNum];
+            tNum++;
+            if (tNum >= 4)
+            {
+                tNum = 0;
+            }
+            yield return new WaitForSeconds(0.35f);
+        }
+    }
+
+    private IEnumerator LoadSceneC(string sceneName)
+    {
+        load.SetActive(true);
+        StartCoroutine(LoadAnim());
+        yield return new WaitForSeconds(0.5f);
+        //SceneManager.LoadScene(sceneName);
+        level = SceneManager.LoadSceneAsync(sceneName);
+
+/*        while (level.progress != 0.9f)
+        {
+
+            yield return new WaitForSeconds(0.001f);
+        }
+
+        ChangeSize(1);*/
+
+
+
+    }
+
     public void LoadScene(string sceneName)
     {
-        //StartCoroutine(LoadSceneCoroutine(sceneName));
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(LoadSceneC(sceneName));
     }
+
+
 }
