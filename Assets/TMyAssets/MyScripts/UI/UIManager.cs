@@ -51,6 +51,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         _achievementListInGame = FindObjectOfType<AchievenmentListIngame>();
         _blackScreenFade = FindObjectOfType<BlackScreenFade>();
     }
@@ -169,12 +170,13 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator LoadSceneC(string sceneName)
     {
+
         load.SetActive(true);
         StartCoroutine(LoadAnim());
         yield return new WaitForSeconds(0.5f);
         //SceneManager.LoadScene(sceneName);
         level = SceneManager.LoadSceneAsync(sceneName);
-
+        yield break;
 /*        while (level.progress != 0.9f)
         {
 

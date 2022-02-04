@@ -43,6 +43,8 @@ public class SecurityController : MonoBehaviour
     public bool autoPilot;
 
     public bool isStoped;
+    public bool isNash;
+
 
     GameObject objTxt;
 
@@ -72,40 +74,64 @@ public class SecurityController : MonoBehaviour
         Destroy(objTxt);
     }
 
-    private void DrawPath()
+    private IEnumerator DrawPath()
     {
 
         int countRobb = TargetsManager.Instance.robbersInLevel.Count;
-        if (countRobb < 0) return;
+
+        if (countRobb < 0) yield break;
         
         if (_targetForRadio == null)
         {
+          
             for (int i = 0; i < countRobb; i++)
             {
                 var house = TargetsManager.Instance.robbersInLevel[i].GetComponent<RoberryPathFinder>().movePositionHouse;
+            
+
                 if (!house.securityProtected && (house.going_to_rob || house.rob))
                 {
                     _targetForRadio = TargetsManager.Instance.robbersInLevel[i];
+                   
                     if (autoPilot)
                     {
                         List<Vector3> _points = new List<Vector3>();
+                        
                         //_points.Add(transform.position);
 
                         var target = house._targetPoint.GetComponent<TargetPont>();
                         _points.Add(target.transform.position);
-/*                        fieldPathDraw.transform.position = target.transform.position;*/
+
+                     
+                        /* fieldPathDraw.transform.position = target.transform.position; */
                         tartgetHouse = target;
+                        yield return new WaitForSeconds(0.1f);
                         tartgetHouse._house.SetSecurityProtected();
+                        yield return new WaitForSeconds(0.1f);
                         pathCreator.StartMoveAutopilot(_points);
+         
                         //AutoPilotOn();
                     }
                     break;
                 }
             }
+
+           // Debug.Log(_targetForRadio == null);
         }
 
-        if (_targetForRadio == null) return;
 
+
+        if (_targetForRadio == null) {
+           // Debug.Log("Крашимся");
+            yield break;
+        }
+
+        if (!isNash)
+        {
+            isNash = true;
+            //Debug.Log("нашли " + _targetForRadio);
+        }
+       
         /* Debug.Log(_targetForRadio.GetComponent<RoberryPathFinder>().movePositionHouse._targetPoint.transform.position);*/
 /*        if (true)
         {
@@ -123,7 +149,7 @@ public class SecurityController : MonoBehaviour
 
         if (_navMeshAgentRadio.path.corners.Length < 2)
         {
-            return;
+            yield break; 
         }
         
         for (int i = 0; i < _navMeshAgentRadio.path.corners.Length; i++)
@@ -247,7 +273,7 @@ public class SecurityController : MonoBehaviour
 
         if (bestRoad)
         {
-            DrawPath();
+            StartCoroutine(DrawPath());
         }
         
     }    

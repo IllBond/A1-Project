@@ -137,6 +137,10 @@ public class CutScene : MonoBehaviour
 
     private void EndCutScene() {
         gameObject.SetActive(false);
+        _nextButton.SetActive(false);
+        _prevButton.SetActive(false);
+
+        _endButton.SetActive(false);
         GameManager.Instance.StartGame();
     }
 

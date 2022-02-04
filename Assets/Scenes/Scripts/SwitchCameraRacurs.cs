@@ -35,7 +35,7 @@ public class SwitchCameraRacurs : MonoBehaviour
         _isSwitch = true;
         _elapsedTime = 0;
         Time.timeScale = 1;
-        Debug.Log("Возобновляем в build mode");
+        //Debug.Log("Возобновляем в build mode");
     }
 
 

@@ -242,7 +242,7 @@ public class FirebaseManager : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2);
-        UIManager.instance.ShowLoginScreen();
+        //UIManager.instance.ShowLoginScreen();
         _warningRegisterText.text = string.Empty;
         ClearRegisterFields();
         ClearLoginFields();

@@ -68,7 +68,8 @@ public class Factory : MonoBehaviour
         Transform randomPosition = randomHouse.transformForPathFinder;
         if (Vector3.Distance(randomPosition.position, spawnPointTransform.position) < minDistance)
         {
-            Debug.Log("Spawn skipped. Distance to target is too short.");
+            //Debug.Log("Spawn skipped. Distance to target is too short.");
+            SpawnOnceRubber();
             return;
         }
         _lastSpawnPoint = randomSpawnIndex;

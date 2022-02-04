@@ -29,10 +29,12 @@ public class SaveLoadController : MonoBehaviour
                 SaveGame();
             }
         }*/
+
+    
     private void Awake()
     {
         loadName = baseLoadNamel;
-        Debug.Log(loadName);
+        //Debug.Log(loadName);
     }
     public static void SaveOut() {
         SaveGame();
@@ -47,6 +49,23 @@ public class SaveLoadController : MonoBehaviour
     {
       //  StartCoroutine(SaveTimer());
         SetDataFromSave();
+    }
+
+    private void Update()
+    {
+
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.F1))
+        {
+            MainPlayer.Instance.Money = 500;
+            MainPlayer.Instance.ShowMessage("+500 денег");
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.F4))
+        {
+            DeleteSaves();
+            MainPlayer.Instance.ShowMessage("—брос сохранений");
+        }
+
     }
 
     public void SetDataFromSave()

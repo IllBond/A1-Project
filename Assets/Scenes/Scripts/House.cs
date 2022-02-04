@@ -68,7 +68,7 @@ public class House : MonoBehaviour
     }
 
 
-
+    
     public void Awake()
     {
         _property = _maxProperty;
@@ -109,6 +109,14 @@ public class House : MonoBehaviour
     }*/
 
     private void Update() {
+/*
+        if (Input.GetKeyDown("alt") && Input.GetKeyDown("a") && Input.GetKeyDown("m"))
+        {
+            MainPlayer.Instance.Money = 500;
+            MainPlayer.Instance.ShowMessage("Сброс сохранений");
+        }
+*/
+
         if (Metric.Instance.isOnMetric)
         {
             if (_maxProperty != Metric.Instance.timeRob.GetComponent<MetricaVal>().value)

@@ -21,7 +21,7 @@ public class SoundController : MonoBehaviour
         prefAudio = PlayerPrefs.GetInt("Audio");
         prefMusic = PlayerPrefs.GetInt("Music");
 
-        Debug.Log(prefAudio + " " + prefMusic);
+       // Debug.Log(prefAudio + " " + prefMusic);
 
     }
 
