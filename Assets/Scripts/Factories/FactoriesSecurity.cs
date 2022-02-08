@@ -17,7 +17,7 @@ public class FactoriesSecurity : MonoBehaviour
     public List<GameObject> _spawnedCars;
     public Transform _lastSpawnObject;
     public Outline _outline;
-    public SelectionOutlineController _selectionOutlineController;
+    //public SelectionOutlineController _selectionOutlineController;
 
     public GameObject isUpdate;
 
@@ -151,13 +151,13 @@ public class FactoriesSecurity : MonoBehaviour
 
     public void OutlineOn()
     {
-        //_outline.enabled = true;
+        _outline.enabled = true;
     }
 
     public void OutlineOff()
     {
         //_selectionOutlineController.ClearTarget();
-        //_outline.enabled = false;
+        _outline.enabled = false;
     }
 
     private bool UpgradeMoreCar() {

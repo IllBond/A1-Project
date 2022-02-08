@@ -41,7 +41,7 @@ public class House : MonoBehaviour
     public GameObject zabor;
     private TargetPont _vfx;
     private Outline _outline;
-    public SelectionOutlineController _selectionOutlineController;
+    //public SelectionOutlineController _selectionOutlineController;
 
     private FirebaseManager firebase;
 
@@ -294,12 +294,12 @@ public class House : MonoBehaviour
 
 
     public void OutlineOn() {
-        //_outline.enabled = true;
+        _outline.enabled = true;
     }
 
     public void OutlineOff() {
         //_selectionOutlineController.ClearTarget();
-        //_outline.enabled = false;
+        _outline.enabled = false;
     }
 
 
