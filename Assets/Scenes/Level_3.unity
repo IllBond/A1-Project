@@ -3464,7 +3464,7 @@ MonoBehaviour:
   _spawnedCars: []
   _lastSpawnObject: {fileID: 0}
   _outline: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   isUpdate: {fileID: 1398544508}
   upg_moreCar: 0
   upg_teach: 0
@@ -34858,7 +34858,6 @@ GameObject:
   - component: {fileID: 1510282660}
   - component: {fileID: 1510282663}
   - component: {fileID: 1510282664}
-  - component: {fileID: 1510282665}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -34964,28 +34963,6 @@ MonoBehaviour:
   SwichSpeed: 2
   ButtonBuildMode: {fileID: 67768727}
   ButtonViewMode: {fileID: 2013831078}
---- !u!114 &1510282665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1510282659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e950cacae63d61a4e821edb397a8cd95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _layersSuccess:
-    serializedVersion: 2
-    m_Bits: 3072
-  SelectionMode: 1
-  OutlineType: 0
-  AlphaMode: 0
-  OutlineColor: {r: 1, g: 1, b: 1, a: 1}
-  OccludedColor: {r: 0.5, g: 0.9, b: 0.3, a: 1}
-  OutlineWidth: 0.2
-  OutlineHardness: 0.85
 --- !u!1 &1511442085
 GameObject:
   m_ObjectHideFlags: 0
@@ -46908,7 +46885,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -47014,7 +46991,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -47155,7 +47132,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -56050,7 +56027,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -56119,7 +56096,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -56196,7 +56173,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -56265,7 +56242,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -56390,7 +56367,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -56661,7 +56638,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -56864,7 +56841,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -56933,7 +56910,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -57043,7 +57020,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -57217,7 +57194,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -57669,7 +57646,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -57858,7 +57835,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -58109,7 +58086,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -58284,7 +58261,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -58450,7 +58427,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -58568,7 +58545,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -58787,7 +58764,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -58856,7 +58833,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -58925,7 +58902,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -59035,7 +59012,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -59143,7 +59120,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -59227,7 +59204,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -59657,7 +59634,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -59790,7 +59767,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -60023,7 +60000,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -60121,7 +60098,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -60298,7 +60275,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -60382,7 +60359,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -60873,7 +60850,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -60958,7 +60935,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -61091,7 +61068,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -61215,7 +61192,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -61348,7 +61325,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
@@ -61473,7 +61450,7 @@ MonoBehaviour:
   houseRob: {fileID: 0}
   security: {fileID: 0}
   zabor: {fileID: 0}
-  _selectionOutlineController: {fileID: 1510282665}
+  _selectionOutlineController: {fileID: 0}
   going_to_rob: 0
   rob: 0
   securityProtected: 0
