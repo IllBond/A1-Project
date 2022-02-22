@@ -55,7 +55,7 @@ public class UIAchievement : MonoBehaviour
 
                 if (State.Achieved)
                 {
-                    Percent.text = Information.ProgressGoal + Information.ProgressSuffix + " / " + Information.ProgressGoal + Information.ProgressSuffix + " (Achieved)";
+                    Percent.text = Information.ProgressGoal + Information.ProgressSuffix + " / " + Information.ProgressGoal + Information.ProgressSuffix + " (Открыто)";
                 }
                 else
                 {
@@ -67,7 +67,7 @@ public class UIAchievement : MonoBehaviour
             else //Single Time
             {
                 ProgressBar.fillAmount = State.Achieved ? 1 : 0;
-                Percent.text = State.Achieved ? "(Achieved)" : "(Locked)";
+                Percent.text = State.Achieved ? "(Открыто)" : "(Закрыто)";
             }
         }
     }

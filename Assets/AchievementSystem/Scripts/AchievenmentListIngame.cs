@@ -32,11 +32,11 @@ public class AchievenmentListIngame : MonoBehaviour
         int AchievedCount = AM.GetAchievedCount();
 
         CountText.text = "" + AchievedCount + " / " + AM.States.Count;
-        CompleteText.text = "Complete (" + AM.GetAchievedPercentage() + "%)";
+        CompleteText.text = "Завершено (" + AM.GetAchievedPercentage() + "%)";
 
         for (int i = 0; i < AM.AchievementList.Count; i ++)
         {
-            if((Filter.Equals("All")) || (Filter.Equals("Achieved") && AM.States[i].Achieved) || (Filter.Equals("Unachieved") && !AM.States[i].Achieved))
+            if((Filter.Equals("Все")) || (Filter.Equals("Открыты") && AM.States[i].Achieved) || (Filter.Equals("Закрыты") && !AM.States[i].Achieved))
             {
                 AddAchievementToUI(AM.AchievementList[i], AM.States[i]);
             }
@@ -73,7 +73,7 @@ public class AchievenmentListIngame : MonoBehaviour
     {
         MenuOpen = true;
         Menu.SetActive(MenuOpen);
-        AddAchievements("All");
+        AddAchievements("Все");
     }
     /// <summary>
     /// Toggles the state of the UI window open or closed
