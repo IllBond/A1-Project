@@ -76,7 +76,7 @@ public class UIManager : MonoBehaviour
     {
         ShowMainMenuScreen();
 
-        _inviteButton.interactable = false;
+        //_inviteButton.interactable = false;
         _leaderboardButton.interactable = false;
 
         GuestHolder.state = true;

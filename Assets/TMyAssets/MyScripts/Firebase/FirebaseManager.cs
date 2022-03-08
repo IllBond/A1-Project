@@ -83,11 +83,12 @@ public class FirebaseManager : MonoBehaviour
     {
         if (_auth.CurrentUser != null)
         {
+            UIManager.instance.ShowMainMenuScreen();
             _user = _auth.CurrentUser;
             Debug.Log(_user.Email);
 
             DownloadUserDataFromFirebase();
-            UIManager.instance.ShowMainMenuScreen();
+            
         }
         else
         {

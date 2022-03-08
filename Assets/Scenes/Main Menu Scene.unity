@@ -844,6 +844,7 @@ GameObject:
   m_Component:
   - component: {fileID: 143520012}
   - component: {fileID: 143520013}
+  - component: {fileID: 143520014}
   m_Layer: 0
   m_Name: FirebaseManager
   m_TagString: Untagged
@@ -877,10 +878,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e7f3edf2afd92b4b8ef6e9bf0aab55d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _emailLoginField: {fileID: 0}
-  _passwordLoginField: {fileID: 0}
-  _warningLoginText: {fileID: 0}
-  _loginDebugMessage: {fileID: 0}
+  _emailLoginField: {fileID: 379206000}
+  _passwordLoginField: {fileID: 1160825641}
+  _warningLoginText: {fileID: 255367774}
+  _loginDebugMessage: {fileID: 255367774}
   _usernameRegisterField: {fileID: 28153690}
   _emailRegisterField: {fileID: 1705510913}
   _passwordRegisterField: {fileID: 1484623463}
@@ -888,6 +889,19 @@ MonoBehaviour:
   _warningRegisterText: {fileID: 537031899}
   _scoreElement: {fileID: 1879445940651037232, guid: 829cd42e5df49e047a3a4afb1ba6859d, type: 3}
   _scoreboardContent: {fileID: 1253624677}
+--- !u!114 &143520014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143520011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db656316ba2dbdd41be6de0db797d6f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: {fileID: 1267980416}
 --- !u!1 &144665403
 GameObject:
   m_ObjectHideFlags: 0
@@ -4029,7 +4043,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 936441187}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: FacebookManager, Assembly-CSharp
         m_MethodName: LoginButtonForFB
         m_Mode: 1
         m_Arguments:
@@ -5992,7 +6006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d63471623f81f5499d4d9fef1056936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
+  text: {fileID: 2121303059}
 --- !u!1 &983736880
 GameObject:
   m_ObjectHideFlags: 0
@@ -8608,6 +8622,86 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256117757}
+  m_CullTransparentMesh: 1
+--- !u!1 &1267980416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1267980417}
+  - component: {fileID: 1267980419}
+  - component: {fileID: 1267980418}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1267980417
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267980416}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8305133164408252454}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -98.52}
+  m_SizeDelta: {x: 800, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1267980418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267980416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.053194284, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 35
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u0421\u0441\u044B\u043B\u043A\u0430 \u0441\u043A\u043E\u043F\u0438\u0440\u043E\u0432\u0430\u043D\u0430
+    \u0432 \u0431\u0443\u0444\u0435\u0440 \u043E\u0431\u043C\u0435\u043D\u0430"
+--- !u!222 &1267980419
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1267980416}
   m_CullTransparentMesh: 1
 --- !u!1 &1273597479
 GameObject:
@@ -16045,7 +16139,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u044C \u0441\u0441\u044B\u043B\u043A\u0443"
+  m_Text: "\u041F\u0440\u0438\u0433\u043B\u0430\u0441\u0438\u0442\u044C \u0434\u0440\u0443\u0437\u0435\u0439"
 --- !u!224 &8305133164064763654
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16283,9 +16377,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 143520013}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: CopyLinkButton
+      - m_Target: {fileID: 143520014}
+        m_TargetAssemblyTypeName: CopyLink, Assembly-CSharp
+        m_MethodName: Copy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16523,6 +16617,7 @@ RectTransform:
   - {fileID: 8305133165174640933}
   - {fileID: 8305133164255715724}
   - {fileID: 1117031597}
+  - {fileID: 1267980417}
   m_Father: {fileID: 687490506}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

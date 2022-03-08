@@ -112,7 +112,7 @@ public class FacebookManager : MonoBehaviour
     public void LoginButtonForFB()
     {
         var permissions = new List<string>() {};
-        FB.LogInWithReadPermissions(null, AuthStatusCallback);
+        FB.LogInWithReadPermissions(permissions, AuthStatusCallback);
     }
 
     private void LogOut()
