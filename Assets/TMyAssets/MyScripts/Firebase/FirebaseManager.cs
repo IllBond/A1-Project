@@ -41,6 +41,8 @@ public class FirebaseManager : MonoBehaviour
     private const string _dbUsernameField = "username";
     private const string _dbExpField = "exp";
 
+    private bool _isLoader;
+
     #endregion
 
     #region Awake & Start
@@ -52,30 +54,48 @@ public class FirebaseManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(Starter());
+    }
+
+
+    #endregion
+
+    #region InitialFirebase & AuthStateChanged
+
+    IEnumerator Starter() {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
+            _isLoader = true;
             _dependencyStatus = task.Result;
 
             if (_dependencyStatus == DependencyStatus.Available)
             {
                 UnityMainThread.wkr.AddJob(InitializeFirebase);
+
             }
             else
             {
                 Debug.LogError("Could not resolve all Firebase dependencies: " + _dependencyStatus);
+
             }
+
         });
+
+        if (!_isLoader)
+        {
+            yield return new WaitForSeconds(1);
+            StartCoroutine(Starter());
+        }
+        else {
+            yield break;
+        }
+
     }
-
-    
-    #endregion
-
-    #region InitialFirebase & AuthStateChanged
-    
     private void InitializeFirebase()
     {
         _auth = FirebaseAuth.DefaultInstance;
         _dataBaseReference = FirebaseDatabase.DefaultInstance.RootReference;
+        
         _auth.StateChanged += AuthStateChanged;
     }
 
@@ -93,6 +113,7 @@ public class FirebaseManager : MonoBehaviour
         else
         {
             UIManager.instance.ShowLoginScreen();
+            
         }
     }
     
