@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Helpers;
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -146,53 +148,43 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
-/*    private IEnumerator LoadSceneCoroutine(string sceneName)
+    private bool _isAnimating = false;
+    private async Task LoadAnim(int delay)
     {
-       // _blackScreenFade.FadeIn();
-        yield return new WaitForSeconds(0.2f);
-        
-    }*/
-
-    private IEnumerator LoadAnim()
-    {
-        while (true)
+        if (_isAnimating == false)
         {
-            Debug.Log("Остановочка");
-            loadText.text = t[tNum];
-            tNum++;
-            if (tNum >= 4)
-            {
-                tNum = 0;
-            }
-            yield return new WaitForSeconds(0.35f);
+            _isAnimating = true;
+            await AsyncHelper.DelayAndDo(delay, () => { SetLoadingText(); _isAnimating = false; });
         }
     }
 
-    private IEnumerator LoadSceneC(string sceneName)
+    private async void LoadSceneC(string sceneName)
     {
-
-        load.SetActive(true);
-        StartCoroutine(LoadAnim());
-        yield return new WaitForSeconds(0.5f);
-        //SceneManager.LoadScene(sceneName);
-        level = SceneManager.LoadSceneAsync(sceneName);
-        yield break;
-/*        while (level.progress != 0.9f)
+        await AsyncHelper.Delay( async () =>
         {
+            ResetLoadingText();
+            load.SetActive(true);
 
-            yield return new WaitForSeconds(0.001f);
-        }
-
-        ChangeSize(1);*/
-
-
-
+            level = SceneManager.LoadSceneAsync(sceneName);
+            while (level.isDone == false) await LoadAnim(300);
+        });
     }
 
     public void LoadScene(string sceneName)
     {
-        StartCoroutine(LoadSceneC(sceneName));
+        LoadSceneC(sceneName);
     }
 
+    private void SetLoadingText()
+    {
+        loadText.text = t[tNum];
+        tNum++;
+        if (tNum >= t.Length) tNum = 0;
+    }
 
+    private void ResetLoadingText()
+    {
+        tNum = 0;
+        loadText.text = t[tNum];
+    }
 }
