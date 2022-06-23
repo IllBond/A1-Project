@@ -140,11 +140,6 @@ public class Factory : MonoBehaviour
             }
         }
 
-        
-
-
-
-
         TargetsManager.Instance.robberTargetPositions.Remove(randomHouse);
         TargetsManager.Instance.robbersInLevel.Add(car);
         

@@ -21,31 +21,29 @@ namespace PlayerCar
 
         public Action PathReached;
 
-        private void OnEnable() =>
-           _pathCreator.OnNewPathCreated += SetPoints;
-        private void OnDisable() =>
-           _pathCreator.OnNewPathCreated -= SetPoints;
+        private void OnEnable() => _pathCreator.OnNewPathCreated += SetPoints;
+        private void OnDisable() => _pathCreator.OnNewPathCreated -= SetPoints;
 
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            
+
         }
 
         private void Start()
         {
             _navMeshAgent.speed = Metric.Instance.isOnMetric ? Metric.Instance.policeCarSpeed.GetComponent<MetricaVal>().value : _speed;
         }
-        private void Update() =>
-           MovingThoughPath();
+
+        private void Update()
+        {
+            MovingThoughPath();
+        }
 
         private void MovingThoughPath()
         {
-            if (ShouldSetDestination())
-
-                _navMeshAgent.SetDestination(_pathPoints.Dequeue());
-            if (!IsPathNeedToDestroy())
-                return;
+            if (ShouldSetDestination()) _navMeshAgent.SetDestination(_pathPoints.Dequeue());
+            if (!IsPathNeedToDestroy()) return;
 
             PathReached?.Invoke();
             enabled = false;
@@ -56,40 +54,41 @@ namespace PlayerCar
 
         private bool ShouldSetDestination()
         {
-            if (_pathPoints.Count == 0)
+            if (_pathPoints.Count == 0) return false;
 
-                return false;
             return _navMeshAgent.hasPath == false || _navMeshAgent.remainingDistance < 0.5f;
         }
 
 
-        public void StopMove() {
+        public void StopMove()
+        {
             _navMeshAgent.isStopped = true;
         }
-        
-        public void StartMove() {
+
+        public void StartMove()
+        {
             _navMeshAgent.isStopped = false;
         }
 
 
-      private void SetPoints(List<Vector3> points)
-      {
-         _isPathCreated = true;
-         _pathPoints = new Queue<Vector3>(CreateTempPath(points));
-         _pathCreator.OnNewPathCreated -= SetPoints;
-      }
+        private void SetPoints(List<Vector3> points)
+        {
+            _isPathCreated = true;
+            _pathPoints = new Queue<Vector3>(CreateTempPath(points));
+            _pathCreator.OnNewPathCreated -= SetPoints;
+        }
 
-      private static IEnumerable<Vector3> CreateTempPath(IReadOnlyList<Vector3> points)
-      {
-         List<Vector3> tmp = new List<Vector3>();
-         for (int i = 0; i < points.Count; i += _simplifierPath)
-         {
-            tmp.Add(points[i]);
-         }
+        private static IEnumerable<Vector3> CreateTempPath(IReadOnlyList<Vector3> points)
+        {
+            List<Vector3> tmp = new List<Vector3>();
+            for (int i = 0; i < points.Count; i += _simplifierPath)
+            {
+                tmp.Add(points[i]);
+            }
 
-         if (!tmp.Contains(points.Last()))
-            tmp.Add(points.Last());
-         return tmp;
-      }
-   }
+            if (!tmp.Contains(points.Last()))
+                tmp.Add(points.Last());
+            return tmp;
+        }
+    }
 }

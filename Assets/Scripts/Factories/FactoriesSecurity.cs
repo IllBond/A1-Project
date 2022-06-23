@@ -1,3 +1,4 @@
+using Helpers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +23,9 @@ public class FactoriesSecurity : MonoBehaviour
     public GameObject isUpdate;
 
 
-    [Header("Updates")] 
+    [Header("Updates")]
     public bool upg_moreCar;
-    
+
     public bool upg_teach; // Скорость ++
     public bool upg_powerUp; // Время --
     public bool upg_tablet; // Скорость ++
@@ -64,28 +65,22 @@ public class FactoriesSecurity : MonoBehaviour
 
         for (int i = 0; i < TargetsManager.Instance.robbersInLevel.Count; i++)
         {
-            TargetsManager.Instance.robbersInLevel[i].GetComponent<RoberryPathFinder>().movePositionHouse.ExpertDestroyAll(); 
+            TargetsManager.Instance.robbersInLevel[i].GetComponent<RoberryPathFinder>().movePositionHouse.ExpertDestroyAll();
         }
 
-        
+
         time = Time.unscaledTime;
 
 
         _expertButton.GetComponent<ButtonSize>().enabled = false;
         _expertButton.GetComponent<EventTrigger>().enabled = false;
         _expertButton.GetComponent<Button>().interactable = false;
-        // }
-
     }
-
-
 
     public void ResetButtonExpert()
     {
         if (!_expertButton.GetComponent<Button>().interactable)
         {
-           // Debug.Log("Перезапустили кнопку Эксперт");
-
             _expertButton.GetComponent<ButtonSize>().enabled = true;
             _expertButton.GetComponent<EventTrigger>().enabled = true;
             _expertButton.GetComponent<Button>().interactable = true;
@@ -102,16 +97,13 @@ public class FactoriesSecurity : MonoBehaviour
 
         maxCount = carsCount;
 
-        if (upg_moreCar)
-        {
-            maxCount++;
-        }
+        if (upg_moreCar) maxCount++;
 
         StartCoroutine(DelySpawn());
         StartCoroutine(SelectionOutlineControllerStarter());
     }
 
-    
+
     IEnumerator SelectionOutlineControllerStarter()
     {
         yield return new WaitForSeconds(0.1f);
@@ -119,7 +111,8 @@ public class FactoriesSecurity : MonoBehaviour
 
     }
 
-    IEnumerator DelySpawn() {
+    IEnumerator DelySpawn()
+    {
         yield return new WaitForSeconds(1);
         SpawnSecurityCar();
         StartCoroutine(CarSpawner());
@@ -142,7 +135,7 @@ public class FactoriesSecurity : MonoBehaviour
         }
         else
         {
-   
+
             MainPlayer.Instance.ShowMessage("Не хватает денег. Нужно " + price);
             // Debug.Log("Не хватает денег");ShowMessage
             return false;
@@ -160,59 +153,64 @@ public class FactoriesSecurity : MonoBehaviour
         _outline.enabled = false;
     }
 
-    private bool UpgradeMoreCar() {
-        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240) ;
-        string name = "Больше машин" ;
+    private bool UpgradeMoreCar()
+    {
+        int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240);
+        string name = "Больше машин";
 
         bool result = Upgrader(price, name);
         if (result) upg_moreCar = true;
         carsCount++;
         maxCount++;
 
-
         return result;
-    }    
-    
-    private bool UpgradeTeach() {
+    }
+
+    private bool UpgradeTeach()
+    {
         int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240);
-        string name = "Обучение сотрудников" ;
+        string name = "Обучение сотрудников";
 
         bool result = Upgrader(price, name);
         if (result) upg_teach = true;
         return result;
-    }   
-    
-    private bool UpgradePower() {
+    }
+
+    private bool UpgradePower()
+    {
         int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240);
-        string name = "Сила сотрудников" ;
+        string name = "Сила сотрудников";
 
         bool result = Upgrader(price, name);
         if (result) upg_powerUp = true;
         return result;
-    }  
-    
-    private bool UpgradeTablet() {
+    }
+
+    private bool UpgradeTablet()
+    {
         int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240);
-        string name = "Планшет" ;
+        string name = "Планшет";
 
         bool result = Upgrader(price, name);
         if (result) upg_tablet = true;
         return result;
-    }    
-    
-    private bool UpgradeRadio() {
+    }
+
+    private bool UpgradeRadio()
+    {
         int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240);
-        string name = "Рация" ;
+        string name = "Рация";
 
         bool result = Upgrader(price, name);
         Debug.Log(price);
         if (result) upg_radio = true;
         return result;
-    }    
-    
-    private bool UpgradeFleshers() {
+    }
+
+    private bool UpgradeFleshers()
+    {
         int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSecurity.GetComponent<MetricaVal>().value : 240);
-        string name = "Мигалки" ;
+        string name = "Мигалки";
 
         bool result = Upgrader(price, name);
         if (result) upg_fleshers = true;
@@ -243,15 +241,11 @@ public class FactoriesSecurity : MonoBehaviour
                 return UpgradeFleshers();
                 break;
             default:
-               // Debug.LogError("Не понимаю что нужно улучшить");
+                // Debug.LogError("Не понимаю что нужно улучшить");
                 return false;
                 break;
         }
     }
-
-
-
-
 
     public void HelpConsultation()
     {
@@ -269,54 +263,55 @@ public class FactoriesSecurity : MonoBehaviour
     }
 
     [ContextMenu("SpawnSecurityCar")]
-    public void SpawnSecurityCar() {
-        if (carsCount > 0 && GetDistance())
+    public async void SpawnSecurityCar()
+    {
+        await AsyncHelper.Delay(() =>
         {
-            var car = Instantiate(_car, _spawnPoint.position, _spawnPoint.rotation);
-
-            _lastSpawnObject = car.GetComponent<Transform>();
-            UpgraderCar(car.GetComponent<SecurityController>());
-            if (upg_fleshers)
+            if (carsCount > 0 && GetDistance())
             {
-                car.GetComponent<SecurityController>().SerenOn();
+                var car = Instantiate(_car, _spawnPoint.position, _spawnPoint.rotation);
+
+                var securityController = car.GetComponent<SecurityController>();
+
+                _lastSpawnObject = car.GetComponent<Transform>();
+                UpgraderCar(securityController);
+                if (upg_fleshers) securityController.SerenOn();
+
+                _spawnedCars.Add(car);
+                carsCount--;
+
+                securityController.onDestroy += OnDestroyCar;
             }
-            _spawnedCars.Add(car);
-            carsCount--;
-        }
-       
+        });
+    }
+
+    private void OnDestroyCar(SecurityController securityController)
+    {
+        securityController.onDestroy -= OnDestroyCar;
+
+        _spawnedCars.Remove(securityController.gameObject);
+        _spawnedCars.RemoveAll((x) => x == null);
     }
 
     private void UpgraderCar(SecurityController car)
     {
-        
-    /*public bool upg_teach; // Скорость ++
-    public bool upg_powerUp; // Время --
-    public bool upg_tablet; // Скорость ++
-    public bool upg_radio; // Включение определения маршрута
-    public bool upg_fleshers; // Скорость ++*/
-        
-        
         if (upg_teach) car.SpeedUp();
         if (upg_powerUp) car.ArestSpeed();
         if (upg_tablet) car.SpeedUp();
         if (upg_radio) car.BestRoad();
         if (upg_fleshers) car.SpeedUp();
-        
-        if (upg_teach && upg_powerUp && upg_tablet &&upg_radio && upg_fleshers) car.AutoPilot();
+
+        if (upg_teach && upg_powerUp && upg_tablet && upg_radio && upg_fleshers) car.AutoPilot();
     }
 
-    private bool GetDistance() {
+    private bool GetDistance()
+    {
         if (_lastSpawnObject == null) return true;
 
-        if (Vector3.Distance(transform.position, _lastSpawnObject.position) > distToSpawn) {
+        if (Vector3.Distance(transform.position, _lastSpawnObject.position) > distToSpawn)
+        {
             return true;
         }
         return false;
     }
-/*
-    public void CarEscape(GameObject spawnedCar) {
-        carsCount++;
-        _spawnedCars.Remove(spawnedCar);
-    }*/
-
 }

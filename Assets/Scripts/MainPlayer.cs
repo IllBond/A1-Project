@@ -63,41 +63,6 @@ public class MainPlayer : GameSingleton<MainPlayer>
             ExpValue.text = "" + raiting;
         }
     }
-    /*
-        private string _houseState = "";
-        public string HouseState
-        {
-            get => _houseState;
-            set
-            {
-                _houseState = value;
-                IEnumerator houseSetStatus()
-                {
-                    yield return new WaitForSeconds(2);
-                    _houseState = "";
-                }
-                var HouseSetStatus = StartCoroutine(houseSetStatus());
-
-            }
-        }    */
-
-    /*    private string _policeCarState = "";
-        public string PoliceCarState
-        {
-            get => _policeCarState;
-            set
-            {
-                _policeCarState = value;
-                IEnumerator policeCarSetStatus()
-                {
-                    yield return new WaitForSeconds(2);
-                    _policeCarState = "";
-                }
-                var PoliceCarSetStatus = StartCoroutine(policeCarSetStatus());
-
-            }
-        }*/
-
 
     public override void Update()
     {
@@ -156,26 +121,4 @@ public class MainPlayer : GameSingleton<MainPlayer>
 
         isDown = false;
     }
-
-
- /*   IEnumerator SetMessage()
-    {
-
-        yield return new WaitForSeconds(3);
-
-    }*/
-/*    private void Awake()
-    {
- *//*       UpPos = MessageWindow.position;
-        DownPos = MessageWindowNewPos.position;*//*
-    }*/
-
-/*    void OnGUI()
-    {
-        GUI.TextArea(new Rect(25, 125, 100, 50), "денег "+money);
-        GUI.TextArea(new Rect(25, 175, 100, 50), "рейтинг "+ raiting);
-
-        GUI.TextArea(new Rect(25, 325, 200, 50), ""+ _message);
-
-    }*/
 }

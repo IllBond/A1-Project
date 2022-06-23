@@ -130,25 +130,6 @@ class ScrollAndPinch : MonoBehaviour
                 tmp = new Vector3(-1, tmp.y, tmp.z);
                 camera.transform.position += BorderChecker(tmp) / _scrollSpeed;
             }
-
-
-
-
-
-
-
-
-            /*
-                        if (
-            Input.mousePosition.x > Screen.width - edgeSize || 
-            Input.mousePosition.y > Screen.height - edgeSize || 
-            Input.mousePosition.x < edgeSize || 
-            Input.mousePosition.y < edgeSize) //1100
-                        {
-                            Vector3 tmp = new Vector3(-direction.y, 0, direction.x).normalized;   
-                            camera.transform.position += BorderChecker(new Vector3(Mathf.Round(tmp.x), Mathf.Round(tmp.y), Mathf.Round(tmp.z))) / 14;
-                        }*/
-
         }
 
     }
@@ -200,9 +181,6 @@ class ScrollAndPinch : MonoBehaviour
             
         return Vector3.zero;
     }
-
-
-
 
     private void OnDrawGizmosSelected()
     {

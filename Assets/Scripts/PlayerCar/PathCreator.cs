@@ -5,14 +5,18 @@ using UnityEngine;
 
 namespace PlayerCar
 {
-   [RequireComponent(typeof(LineRenderer))]
-   
-   public class PathCreator : MonoBehaviour
-   {
+    [RequireComponent(typeof(LineRenderer))]
+
+    public class PathCreator : MonoBehaviour
+    {
+        [Header("Components")]
+        [SerializeField] private SecurityController _securityController;
+
+        [Header("Settings")]
         [SerializeField] private float _distanceBetweenPoints = 2f;
         [SerializeField] private Vector3 _pointOffset = Vector3.up;
         public int _lastPointIndex;
-      
+
         private const string _mouseButton = "Fire1";
         private const string _roadLayer = "Road";
         private static string _playerCarLayer = "PlayerCar";
@@ -23,11 +27,11 @@ namespace PlayerCar
         private int _layerMaskToEndPoint;
         private int _layerStartPlayerCart;
 
-        
-        bool rightDistantion; 
+
+        bool rightDistantion;
         bool notProtected; // Если никто не едет защищать
         bool nowRob;
-        
+
         private LineRenderer _lineRenderer;
         public List<Vector3> _points = new List<Vector3>();
         private int _closestPointIndex;
@@ -35,8 +39,13 @@ namespace PlayerCar
         public bool _isMove;
 
         private bool _pathIinterrupted;
-      
+
         public Action<List<Vector3>> OnNewPathCreated;
+
+        private void OnValidate()
+        {
+            if (_securityController == null) _securityController = GetComponent<SecurityController>();
+        }
 
         private void Awake()
         {
@@ -49,32 +58,28 @@ namespace PlayerCar
 
         private void Update()
         {
-
             if (_isMove) return;
-            
+
             if (TargetsManager.Instance.isDrawLine || _isMove)
             {
-                GetComponent<SecurityController>().fieldPathDraw.SetActive(false);
+                _securityController.fieldPathDraw.SetActive(false);
 
             }
-            else {
+            else
+            {
                 if (_points.Count > 1)
                 {
                     if (TargetsManager.Instance.isDrawLine)
                     {
-                        GetComponent<SecurityController>().fieldPathDraw.SetActive(false);
-
+                        _securityController.fieldPathDraw.SetActive(false);
                     }
                     else
                     {
                         if (!TargetsManager.Instance.isBuildMode) return;
-                        GetComponent<SecurityController>().fieldPathDraw.transform.position = _points.Last();
-                        GetComponent<SecurityController>().fieldPathDraw.SetActive(true);
+                        _securityController.fieldPathDraw.transform.position = _points.Last();
+                        _securityController.fieldPathDraw.SetActive(true);
                     }
                 }
-
-
-
             }
 
 
@@ -85,11 +90,9 @@ namespace PlayerCar
 
             bool rayCastRoad = Physics.Raycast(ray, out hit, Mathf.Infinity, _layerMask);
 
-            //if (!Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _layerMaskToPlayer)){}
-            Vector3 hitPoint = hit.point +_pointOffset;
+            Vector3 hitPoint = hit.point + _pointOffset;
 
-
-            if (Input.GetButtonDown(_mouseButton) && GetComponent<SecurityController>().autoPilot == false)
+            if (Input.GetButtonDown(_mouseButton) && _securityController.autoPilot == false)
             {
 
                 if (Physics.Raycast(ray, out hitPlayer, Mathf.Infinity, _layerStartPlayerCart))
@@ -98,10 +101,10 @@ namespace PlayerCar
                     {
                         _points.Clear();
                         _points.Add(hit.point + _pointOffset);
-                        
+
                         _lastPointIndex = 0;
                         OnDrawLine();
-                       // MainPlayer.Instance.PathError = "Начало рисования маршрутка";
+                        // MainPlayer.Instance.PathError = "Начало рисования маршрутка";
                         return;
                     }
                 }
@@ -113,7 +116,8 @@ namespace PlayerCar
             }
 
 
-            if (_points.Count > 0) {
+            if (_points.Count > 0)
+            {
                 if (Input.GetButton(_mouseButton))
                 {
                     if (!rayCastRoad)
@@ -132,8 +136,9 @@ namespace PlayerCar
 
                     if ((DistanceToLast(hitPoint) < _distanceBetweenPoints))
                     {
-                       // MainPlayer.Instance.PathError = "Рисую маршрут";
-                        if (_points.Count == _lastPointIndex + 1) {
+                        // MainPlayer.Instance.PathError = "Рисую маршрут";
+                        if (_points.Count == _lastPointIndex + 1)
+                        {
                             _points.Add(hitPoint);
                             OnDrawLine();
                         }
@@ -160,29 +165,30 @@ namespace PlayerCar
                 }
                 else if (Input.GetButtonUp(_mouseButton))
                 {
-                    if (Physics.Raycast(ray, out endTarget, Mathf.Infinity, _layerMaskToEndPoint) )
+                    if (Physics.Raycast(ray, out endTarget, Mathf.Infinity, _layerMaskToEndPoint))
                     {
                         if (!_isMove)
                         {
-                            GetComponent<SecurityController>().tartgetHouse = endTarget.collider.gameObject.GetComponent<TargetPont>();
-      
+                            _securityController.tartgetHouse = endTarget.collider.gameObject.GetComponent<TargetPont>();
+
                         }
                         else
                         {
                             /*MainPlayer.Instance.ShowMessage("Сюда уже едет другая машина");*/
                         }
-                        
-                        var house = GetComponent<SecurityController>().tartgetHouse;
 
-                        rightDistantion = Vector3.Distance(hitPoint, _points.Last()) < _distanceBetweenPoints * 1.2f; 
-                        notProtected = !GetComponent<SecurityController>().tartgetHouse._house.securityProtected; // Если никто не едет защищать
-                        nowRob = (GetComponent<SecurityController>().tartgetHouse._house.rob || GetComponent<SecurityController>().tartgetHouse._house.going_to_rob); //  Если дом грабят или едут грабить
-                        
+                        var house = _securityController.tartgetHouse;
+
+                        rightDistantion = Vector3.Distance(hitPoint, _points.Last()) < _distanceBetweenPoints * 1.2f;
+                        notProtected = !_securityController.tartgetHouse._house.securityProtected; // Если никто не едет защищать
+                        nowRob = (_securityController.tartgetHouse._house.rob || _securityController.tartgetHouse._house.going_to_rob); //  Если дом грабят или едут грабить
+
                         if (!_pathIinterrupted && rightDistantion && notProtected && nowRob)
                         {
-                           
+
                             StartMoveAutopilot(_points);
-                        } else
+                        }
+                        else
                         {
                             if (!nowRob)
                             {
@@ -199,15 +205,14 @@ namespace PlayerCar
 
                         }
 
-                    } else
+                    }
+                    else
                     {
                         //MainPlayer.Instance.ShowMessage("Не верная точка завершения маршрута");
                         OffDrawLine();
                     }
-                 
-
                 }
-                
+
             }
 
         }
@@ -217,18 +222,19 @@ namespace PlayerCar
         {
             _points = points;
             OffDrawLine();
-           // ErrorPath("Маршрут построен");
-            GetComponent<SecurityController>().tartgetHouse._house.SetSecurityProtected();
+            // ErrorPath("Маршрут построен");
+            _securityController.tartgetHouse._house.SetSecurityProtected();
             OnNewPathCreated?.Invoke(points);
             _isMove = true;
-            GetComponent<SecurityController>().Arrow.SetActive(false);
-            Destroy(GetComponent<SecurityController>().StartField);
-           
-            GetComponent<SecurityController>().fieldPathDraw.SetActive(false);
+            _securityController.Arrow.SetActive(false);
+            Destroy(_securityController.StartField);
+
+            _securityController.fieldPathDraw.SetActive(false);
             _lineRenderer.enabled = false;
         }
 
-        private void OffDrawLine() {
+        private void OffDrawLine()
+        {
             TargetsManager.Instance.isDrawLine = false;
         }
 
@@ -239,40 +245,40 @@ namespace PlayerCar
         }
 
         private void DrawPath()
-      {
-          if (!_isMove)
-          {
-              _lineRenderer.positionCount = _points.Count;
-              _lineRenderer.SetPositions(_points.ToArray());
-          }
- 
-      }
-
-      private void RemoveSparePoints()
-      {
-         for (int i = _points.Count-1; i > _closestPointIndex; i--)
-            _points.Remove(_points.Last());
-      }
-
-      private float DistanceToLast(Vector3 hitPoint) =>
-         !_points.Any() ? Mathf.Infinity : Vector3.Distance(_points[_lastPointIndex], hitPoint);
-      
-      private float DistanceToClosestPoint(Vector3 hitPoint) => 
-         _points.Count <= 2 ? Mathf.Infinity : ClosestPointDistance(hitPoint);
-
-      private float ClosestPointDistance(Vector3 hitPoint)
-      {
-         float distance = 100f;
-         for (int i = 0; i < _points.Count -2; i++)
-         {
-            Vector3 point = _points[i];
-            if (Vector3.Distance(point, hitPoint) < distance)
+        {
+            if (!_isMove)
             {
-               distance = Vector3.Distance(point, hitPoint);
-               _closestPointIndex = i;
+                _lineRenderer.positionCount = _points.Count;
+                _lineRenderer.SetPositions(_points.ToArray());
             }
-         }
-         return distance;
-      }
-   }
+
+        }
+
+        private void RemoveSparePoints()
+        {
+            for (int i = _points.Count - 1; i > _closestPointIndex; i--)
+                _points.Remove(_points.Last());
+        }
+
+        private float DistanceToLast(Vector3 hitPoint) =>
+           !_points.Any() ? Mathf.Infinity : Vector3.Distance(_points[_lastPointIndex], hitPoint);
+
+        private float DistanceToClosestPoint(Vector3 hitPoint) =>
+           _points.Count <= 2 ? Mathf.Infinity : ClosestPointDistance(hitPoint);
+
+        private float ClosestPointDistance(Vector3 hitPoint)
+        {
+            float distance = 100f;
+            for (int i = 0; i < _points.Count - 2; i++)
+            {
+                Vector3 point = _points[i];
+                if (Vector3.Distance(point, hitPoint) < distance)
+                {
+                    distance = Vector3.Distance(point, hitPoint);
+                    _closestPointIndex = i;
+                }
+            }
+            return distance;
+        }
+    }
 }

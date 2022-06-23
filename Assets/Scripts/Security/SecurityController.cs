@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.AI;
 
 public class SecurityController : MonoBehaviour
 {
+    public Action<SecurityController> onDestroy;
+
     public StateMachineSecurity stateMachine;
 
     public Vector3 targetTransform;
@@ -21,7 +24,7 @@ public class SecurityController : MonoBehaviour
 
 
     public GameObject messageMark;
-   
+
 
     public GameObject siren;
     public GameObject fieldPathDraw;
@@ -54,21 +57,24 @@ public class SecurityController : MonoBehaviour
     public LineRenderer _radioLineRenderer;
     [SerializeField] private NavMeshAgent _navMeshAgentRadio;
     private GameObject _targetForRadio;
-    
+
     [SerializeField] private float fadeSpeed = 0.4f;
     private Color objectColor;
 
-    public void Inst(string txt) {
+    public void Inst(string txt)
+    {
         objTxt = Instantiate(messageMark, transform.position, Quaternion.identity, transform);
         objTxt.GetComponent<UITimer>().SetBG(true);
         objTxt.GetComponent<UITimer>().SetNewTime(txt, false);
-    }        
-    
-    public void ChangeInst(string txt) {
+    }
+
+    public void ChangeInst(string txt)
+    {
         objTxt.GetComponent<UITimer>().SetNewTime(txt, false);
-    }    
-    
-    public void DeleteInst() {
+    }
+
+    public void DeleteInst()
+    {
         Destroy(objTxt);
     }
 
@@ -78,49 +84,50 @@ public class SecurityController : MonoBehaviour
         int countRobb = TargetsManager.Instance.robbersInLevel.Count;
 
         if (countRobb < 0) yield break;
-        
+
         if (_targetForRadio == null)
         {
-          
+
             for (int i = 0; i < countRobb; i++)
             {
                 var house = TargetsManager.Instance.robbersInLevel[i].GetComponent<RoberryPathFinder>().movePositionHouse;
-            
+
 
                 if (!house.securityProtected && (house.going_to_rob || house.rob))
                 {
                     _targetForRadio = TargetsManager.Instance.robbersInLevel[i];
-                   
+
                     if (autoPilot)
                     {
                         List<Vector3> _points = new List<Vector3>();
-                        
+
                         //_points.Add(transform.position);
 
                         var target = house._targetPoint.GetComponent<TargetPont>();
                         _points.Add(target.transform.position);
 
-                     
+
                         /* fieldPathDraw.transform.position = target.transform.position; */
                         tartgetHouse = target;
                         yield return new WaitForSeconds(0.1f);
                         tartgetHouse._house.SetSecurityProtected();
                         yield return new WaitForSeconds(0.1f);
                         pathCreator.StartMoveAutopilot(_points);
-         
+
                         //AutoPilotOn();
                     }
                     break;
                 }
             }
 
-           // Debug.Log(_targetForRadio == null);
+            // Debug.Log(_targetForRadio == null);
         }
 
 
 
-        if (_targetForRadio == null) {
-           // Debug.Log("Крашимся");
+        if (_targetForRadio == null)
+        {
+            // Debug.Log("Крашимся");
             yield break;
         }
 
@@ -129,13 +136,6 @@ public class SecurityController : MonoBehaviour
             isNash = true;
             //Debug.Log("нашли " + _targetForRadio);
         }
-       
-        /* Debug.Log(_targetForRadio.GetComponent<RoberryPathFinder>().movePositionHouse._targetPoint.transform.position);*/
-/*        if (true)
-        {
-            _targetForRadio = null;
-            return;
-        }*/
 
         var tmp = _targetForRadio.GetComponent<RoberryPathFinder>().movePositionHouse.transformForPathFinder.position;
         _navMeshAgentRadio.SetDestination(new Vector3(tmp.x, 0, tmp.z));
@@ -143,13 +143,13 @@ public class SecurityController : MonoBehaviour
         _radioLineRenderer.positionCount = _navMeshAgentRadio.path.corners.Length;
 
         _radioLineRenderer.SetPosition(0, transform.position);
-        
+
 
         if (_navMeshAgentRadio.path.corners.Length < 2)
         {
-            yield break; 
+            yield break;
         }
-        
+
         for (int i = 0; i < _navMeshAgentRadio.path.corners.Length; i++)
         {
             Vector3 poitPosition = new Vector3(_navMeshAgentRadio.path.corners[i].x,
@@ -191,37 +191,38 @@ public class SecurityController : MonoBehaviour
 
         stateMachine.Initialize(idleState);
 
-        
+
     }
 
     public void SpeedUp()
     {
         pathMover._speed += Metric.Instance.isOnMetric ? Metric.Instance.speedAfterUpdate.GetComponent<MetricaVal>().value : 0.3f;
-       // Debug.Log("Скорость увеличена до " + pathMover._speed);
-        
-    }  
-    
+        // Debug.Log("Скорость увеличена до " + pathMover._speed);
+
+    }
+
     public void ArestSpeed()
     {
         //timeToArest -= Metric.Instance.isOnMetric ? Metric.Instance.valuePowerSecurity.GetComponent<MetricaVal>().value : 1; ;
         timeToArestUP = Metric.Instance.isOnMetric ? Metric.Instance.valuePowerSecurity.GetComponent<MetricaVal>().value : 0.5f; ;
 
         // Debug.Log("Время ареста уменьшено до " + timeToArest);
-    } 
-    
+    }
+
     public void BestRoad()
     {
         bestRoad = true;
-       // Debug.Log("Лучший из маршрутов построен" );
+        // Debug.Log("Лучший из маршрутов построен" );
     }
-    
+
     public void AutoPilot()
     {
         autoPilot = true;
         //Debug.Log("Автопилот установлен" );
     }
 
-    public void SerenOn() {
+    public void SerenOn()
+    {
         siren.SetActive(true);
     }
 
@@ -250,7 +251,7 @@ public class SecurityController : MonoBehaviour
         }
         TargetsManager.Instance.factoriesSecurity.carsCount++;
 
-        Destroy(gameObject);
+        DestroyThis();
     }
 
     private void FixedUpdate()
@@ -264,7 +265,6 @@ public class SecurityController : MonoBehaviour
         {
             timeToArest = (int)Metric.Instance.timeProtect.GetComponent<MetricaVal>().value - timeToArestUP;
         }
-        
 
         stateMachine.CurrentState.HandleInput();
         stateMachine.CurrentState.LogicUpdate();
@@ -273,13 +273,12 @@ public class SecurityController : MonoBehaviour
         {
             StartCoroutine(DrawPath());
         }
-        
-    }    
-    
+    }
+
     public bool GetDistanceToTarget()
     {
-
-        if (Vector3.Distance(targetTransform, transform.position) < 2f) {
+        if (Vector3.Distance(targetTransform, transform.position) < 2f)
+        {
             //_navMeshAgent.isStopped
             return true;
         }
@@ -295,7 +294,9 @@ public class SecurityController : MonoBehaviour
         return false;
     }
 
-    public void DestroyThis() {
+    public void DestroyThis()
+    {
+        onDestroy?.Invoke(this);
         Destroy(gameObject);
     }
 }

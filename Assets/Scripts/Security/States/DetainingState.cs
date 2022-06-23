@@ -8,7 +8,7 @@ public class DetainingState : StateSecurity
 
     int prevTime;
     List<string> variant = new List<string>() { "А1 на месте. До задержания " };
-    int q ;
+    int q;
     public DetainingState(SecurityController character, StateMachineSecurity stateMachine) : base(character, stateMachine)
     {
     }
@@ -22,7 +22,7 @@ public class DetainingState : StateSecurity
         //Debug.Log("задержания случится через " + (timer));
 
         q = Random.Range(0, variant.Count);
-        character.Inst(variant[q] + Mathf.Round(timer - time) + " сек");;
+        character.Inst(variant[q] + Mathf.Round(timer - time) + " сек"); ;
     }
 
     public override void HandleInput()
@@ -31,17 +31,18 @@ public class DetainingState : StateSecurity
     public override void LogicUpdate()
     {
         time += Time.deltaTime;
-        
+
         if (prevTime != (int)time)
         {
-/*            character.DeleteInst();*/
+            /*            character.DeleteInst();*/
             character.ChangeInst(variant[q] + Mathf.Round(timer - time) + " сек");
         }
 
         prevTime = (int)time;
-        if (time > timer) {
-/*            Debug.Log(time);
-            Debug.Log(timer);*/
+        if (time > timer)
+        {
+            /*            Debug.Log(time);
+                        Debug.Log(timer);*/
             character.tartgetHouse._house.IsBeingProtected();
         }
     }

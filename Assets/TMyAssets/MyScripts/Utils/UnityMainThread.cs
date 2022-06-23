@@ -12,8 +12,7 @@ public class UnityMainThread : MonoBehaviour
     }
 
     private void Update() {
-        while (jobs.Count > 0) 
-            jobs.Dequeue().Invoke();
+        while (jobs.Count > 0) jobs.Dequeue().Invoke();
     }
 
     internal void AddJob(Action newJob) {

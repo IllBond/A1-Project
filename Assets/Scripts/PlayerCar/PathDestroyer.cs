@@ -2,26 +2,27 @@ using UnityEngine;
 
 namespace PlayerCar
 {
-   [RequireComponent(typeof(PathMover))]
-   
-   public class PathDestroyer : MonoBehaviour
-   {
-      [SerializeField] private PathMover _pathMover;
-      [SerializeField] private LineRenderer _lineRenderer;
+    [RequireComponent(typeof(PathMover))]
 
-      
-      private void OnEnable()
-      {
-         _pathMover.PathReached += DestroyPath;
-      }
+    public class PathDestroyer : MonoBehaviour
+    {
+        [SerializeField] private PathMover _pathMover;
+        [SerializeField] private LineRenderer _lineRenderer;
 
-      private void OnDisable() =>
-         _pathMover.PathReached -= DestroyPath;
+        private void OnEnable()
+        {
+            _pathMover.PathReached += DestroyPath;
+        }
 
-      private void DestroyPath()
-      {
-         _lineRenderer.positionCount = 0;
-         _pathMover.PathReached -= DestroyPath;
-      }
-   }
+        private void OnDisable()
+        {
+            _pathMover.PathReached -= DestroyPath;
+        }
+
+        private void DestroyPath()
+        {
+            _lineRenderer.positionCount = 0;
+            _pathMover.PathReached -= DestroyPath;
+        }
+    }
 }

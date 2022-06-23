@@ -1,23 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ZoomCamera : MonoBehaviour
 {
     [SerializeField] private float minSize = 8;
     [SerializeField] private float maxSize = 18;
-    [SerializeField] private float sens = 10;
+    [SerializeField] [Range(0, 1)] private float sens = 0.25f;
+    [SerializeField] private float _pcSensMultiplier = 200;
     private Camera m_OrthographicCamera;
 
-
-    int i;
-
+    private void OnValidate()
+    {
+        SetupStandartSensValues();
+    }
 
     private void Start()
     {
+        SetupStandartSensValues();
         m_OrthographicCamera = GetComponent<Camera>();
     }
-
 
     void Update()
     {
@@ -31,22 +31,29 @@ public class ZoomCamera : MonoBehaviour
             float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
             float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
 
-            float deltaMagnitudeDiff = (prevTouchDeltaMag - touchDeltaMag) / sens ;
+            float deltaMagnitudeDiff = (prevTouchDeltaMag - touchDeltaMag) * sens;
             Zoom(deltaMagnitudeDiff);
         }
 
-        Zoom(Input.GetAxis("Mouse ScrollWheel") * sens / 10);
+        float mouseWheelValue = Input.GetAxis("Mouse ScrollWheel");
 
-        
-
+        if(mouseWheelValue != 0)
+        {
+            Zoom(mouseWheelValue * sens * _pcSensMultiplier);
+        }
     }
 
-    private void Zoom(float deltaMagnitudeDiff) {
+    private void Zoom(float deltaMagnitudeDiff)
+    {
 
         m_OrthographicCamera.orthographicSize = Mathf.Clamp(m_OrthographicCamera.orthographicSize + deltaMagnitudeDiff, minSize, maxSize);
     }
 
-
+    private void SetupStandartSensValues()
+    {
+        sens = 0.25f;
+        _pcSensMultiplier = 200;
+    }
 }
 
 
