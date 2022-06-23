@@ -51,8 +51,8 @@ public class ZoomCamera : MonoBehaviour
 
     private void SetupStandartSensValues()
     {
-        sens = 0.25f;
-        _pcSensMultiplier = 200;
+        sens = 0.5f;
+        _pcSensMultiplier = 100;
     }
 }
 
