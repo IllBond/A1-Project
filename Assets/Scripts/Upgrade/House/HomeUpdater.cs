@@ -241,10 +241,6 @@ public class HomeUpdater : MonoBehaviour
             _updateButton_Camera.GetComponent<ButtonSize>().enabled = false;
             _updateButton_Camera.GetComponent<EventTrigger>().enabled = false;
         }      
-        
-
-
-
     }
 
     public void OpenUpgradeMenu() {
