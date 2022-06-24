@@ -29,9 +29,16 @@ public class CutScene : MonoBehaviour
 
     [SerializeField] private bool _skipCutScene;
 
+    [Header("Components")]
+    [SerializeField] private RectTransform _rectTransform;
+    [SerializeField] private CanvasGroup _canvasGroup;
+
 
     private void Start()
     {
+        _rectTransform = GetComponent<RectTransform>();
+        _canvasGroup = GetComponent<CanvasGroup>();
+
         if (_namePrefs == null)
         {
             Debug.LogError("Незвание _namePrefs не указано");
@@ -43,11 +50,12 @@ public class CutScene : MonoBehaviour
         {
             EndCutScene();
         }
-        else {
+        else
+        {
             _nextButton.SetActive(true);
             for (int i = 0; i < _sprites.Length; i++)
             {
-                GameObject image = Instantiate(_emptyImageObject, GetComponent<RectTransform>().position, Quaternion.identity, transform);
+                GameObject image = Instantiate(_emptyImageObject, _rectTransform.position, Quaternion.identity, transform);
                 image.GetComponent<Image>().sprite = _sprites[i];
                 image.GetComponent<RectTransform>().localPosition += new Vector3(i * _wScreen * coefficientWieght, 0, 0);
             }
@@ -65,8 +73,8 @@ public class CutScene : MonoBehaviour
         if (_isMove)
         {
             _elapsedTime += Time.fixedDeltaTime;
-            var newPos = iter * new Vector3(_wScreen* coefficientWieght, 0, 0);
-            GetComponent<RectTransform>().localPosition = Vector3.Lerp(GetComponent<RectTransform>().localPosition, newPos, _elapsedTime * _swichSpeed / 10);
+            var newPos = iter * new Vector3(_wScreen * coefficientWieght, 0, 0);
+            _rectTransform.localPosition = Vector3.Lerp(_rectTransform.localPosition, newPos, _elapsedTime * _swichSpeed / 10);
 
             if (transform.localPosition == newPos)
             {
@@ -77,7 +85,8 @@ public class CutScene : MonoBehaviour
     }
 
 
-    public void NextSlide() {
+    public void NextSlide()
+    {
         _audioSource.PlayOneShot(_nextSlide);
         iter--;
 
@@ -91,11 +100,12 @@ public class CutScene : MonoBehaviour
 
 
 
-        _isMove = true; 
+        _isMove = true;
         _elapsedTime = 0;
-    }    
-    
-    public void PrevSlide() {
+    }
+
+    public void PrevSlide()
+    {
         _audioSource.PlayOneShot(_nextSlide);
         iter++;
 
@@ -108,32 +118,35 @@ public class CutScene : MonoBehaviour
         _nextButton.SetActive(true);
 
 
-        _isMove = true; 
+        _isMove = true;
         _elapsedTime = 0;
 
 
     }
 
 
-    public void EndSlide() {
+    public void EndSlide()
+    {
         _nextButton.SetActive(false);
         _endButton.SetActive(true);
         NextSlide();
         StartCoroutine(FadeSlide());
     }
 
-    IEnumerator FadeSlide() {
+    IEnumerator FadeSlide()
+    {
         _endButton.SetActive(false);
-        while (gameObject.GetComponent<CanvasGroup>().alpha > 0)
+        while (_canvasGroup.alpha > 0)
         {
-            gameObject.GetComponent<CanvasGroup>().alpha -= 0.025f / _fadeSpeed;
+            _canvasGroup.alpha -= 0.025f / _fadeSpeed;
             yield return null;
         }
         PlayerPrefs.SetInt(_namePrefs, 1);
         EndCutScene();
     }
 
-    private void EndCutScene() {
+    private void EndCutScene()
+    {
         gameObject.SetActive(false);
         _nextButton.SetActive(false);
         _prevButton.SetActive(false);
@@ -142,12 +155,14 @@ public class CutScene : MonoBehaviour
         GameManager.Instance.StartGame();
     }
 
-    public void ResetPrefs() {
+    public void ResetPrefs()
+    {
         PlayerPrefs.SetInt(_namePrefs, 0);
         AchivemntController.Instance.ResetAchivement();
     }
 
-    public void Restart() {
+    public void Restart()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

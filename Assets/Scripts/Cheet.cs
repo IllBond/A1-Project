@@ -9,6 +9,9 @@ public class Cheet : MonoBehaviour
     float time;
     float timeer = 5;
 
+    private const string _firstCheet = "00110101";
+    private const string _secontCheet = "00111111";
+
     public void SetFalse() 
     {
         cheet += 0.ToString();
@@ -36,7 +39,7 @@ public class Cheet : MonoBehaviour
     private void Update()
     {
         time += Time.deltaTime;
-        if (cheet == "00110101")
+        if (cheet == _firstCheet)
         {
             MainPlayer.Instance.Money = 5000;
             MainPlayer.Instance.ShowMessage("+5000 денег");
@@ -44,7 +47,7 @@ public class Cheet : MonoBehaviour
         }
                 
         
-        if (cheet == "00111111")
+        if (cheet == _secontCheet)
         {
             MainPlayer.Instance.ShowMessage("—брос сохранений");
             SaveManager.DeleteSave();

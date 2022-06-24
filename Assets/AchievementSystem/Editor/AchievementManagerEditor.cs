@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using CustomEditorTools;
+using System.Collections.Generic;
 using UnityEditor;
-using CustomEditorTools;
+using UnityEngine;
 
 [CustomEditor(typeof(AchievementManager))]
 public class AchievementManagerEditor : Editor
@@ -27,10 +27,10 @@ public class AchievementManagerEditor : Editor
 
     void Awake()
     {
-        MyTarget = (AchievementManager) target;
+        MyTarget = (AchievementManager)target;
         MyTarget.LoadAchievementState();
 
-        for (int i = 0; i < MyTarget.AchievementList.Count; i ++)
+        for (int i = 0; i < MyTarget.AchievementList.Count; i++)
         {
             Hidden.Add(false);
         }
@@ -83,11 +83,11 @@ public class AchievementManagerEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 
-    public void DrawAchievementList ()
+    public void DrawAchievementList()
     {
         if (GUILayout.Button(HideAll ? "Show All" : "Hide All", GUILayout.Width(70)))
         {
-            for(int i = 0; i < Hidden.Count; i++)
+            for (int i = 0; i < Hidden.Count; i++)
             {
                 Hidden[i] = HideAll;
             }
@@ -108,7 +108,7 @@ public class AchievementManagerEditor : Editor
             MyTarget.SaveAchievementState();
             Hidden.Add(false);
         }
-        
+
         CET.HorizontalLine();
         EditorGUILayout.PropertyField(serializedObject.FindProperty("UseFinalAchievement"));
         GUILayout.Label("Define an achievement which will be unlocked once all other have been completed");
@@ -175,8 +175,8 @@ public class AchievementManagerEditor : Editor
 
         GUILayout.EndHorizontal();
 
-       if (Hidden[i])
-       {
+        if (Hidden[i])
+        {
             GUILayout.Space(10);
             EditorGUILayout.PropertyField(Achievement.FindPropertyRelative("Key"));
             EditorGUILayout.PropertyField(Achievement.FindPropertyRelative("DisplayName"));
@@ -197,13 +197,13 @@ public class AchievementManagerEditor : Editor
                 EditorGUILayout.PropertyField(Achievement.FindPropertyRelative("NotificationFrequency"));
                 EditorGUILayout.PropertyField(Achievement.FindPropertyRelative("ProgressSuffix"));
             }
-       }
-       GUILayout.EndVertical();
-       GUILayout.EndVertical();
+        }
+        GUILayout.EndVertical();
+        GUILayout.EndVertical();
     }
 
     public void DrawSettings()
-    {    
+    {
         EditorGUILayout.PropertyField(serializedObject.FindProperty("DisplayTime"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("NumberOnScreen"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("DisplayAchievements"));
@@ -213,9 +213,9 @@ public class AchievementManagerEditor : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("StackLocation"));
         }
         EditorGUILayout.PropertyField(serializedObject.FindProperty("ShowExactProgress"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("AutoSave")); 
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("AutoSave"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("ProgressMadeSound"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("AchievedSound")); 
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("AchievedSound"));
         CET.HorizontalLine();
 
         GUILayout.BeginVertical(ManageBackground);
@@ -258,7 +258,7 @@ public class AchievementManagerEditor : Editor
         }
         if (GUILayout.Button("Reset All States"))
         {
-            if(EditorUtility.DisplayDialog("Reset Confirmation", "Are you sure you want to reset all achevement states?", "Reset", "Cancel"))
+            if (EditorUtility.DisplayDialog("Reset Confirmation", "Are you sure you want to reset all achevement states?", "Reset", "Cancel"))
             {
                 MyTarget.ResetAchievementState();
             }

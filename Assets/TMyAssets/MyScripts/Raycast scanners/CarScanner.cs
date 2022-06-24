@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CarScanner : AScanner
@@ -7,13 +8,20 @@ public class CarScanner : AScanner
 
     private void Update()
     {
-        _scanTimer += Time.deltaTime;
-
-        if (_scanTimer >= _timeToScan)
+        try
         {
-            Ray ray = mainCamera.ScreenPointToRay(mainCamera.WorldToScreenPoint(transform.position));
-            RaycastScan(ray);
+            _scanTimer += Time.deltaTime;
+
+            if (_scanTimer >= _timeToScan)
+            {
+                Ray ray = mainCamera.ScreenPointToRay(mainCamera.WorldToScreenPoint(transform.position));
+                RaycastScan(ray);
+            }
+        }
+        catch(Exception ex)
+        {
+            _scanTimer = 0;
+            Debug.LogWarning(ex.Message);
         }
     }
-
 }

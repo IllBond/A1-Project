@@ -1,5 +1,5 @@
-using UnityEngine;
 using BGGames.Core;
+using UnityEngine;
 
 public class AchivemntController : SceneSingleton<AchivemntController>
 {
@@ -10,26 +10,31 @@ public class AchivemntController : SceneSingleton<AchivemntController>
     }
 
     // Когда будет обучение
-    public void AchTutorial() {
+    public void AchTutorial()
+    {
         AchievementManager.instance.Unlock(0);
     }
 
-    public void AchFirstUpdate() {
+    public void AchFirstUpdate()
+    {
         AchievementManager.instance.Unlock(1);
     }
 
     // Если будет открыта третья локация
-    public void AchOpenAllLocation() {
+    public void AchOpenAllLocation()
+    {
         AchievementManager.instance.Unlock(2);
     }
 
     [ContextMenu("AchAddUpdateHome")]
-    public void AchAddUpdateHome() {
+    public void AchAddUpdateHome()
+    {
         AchievementManager.instance.AddAchievementProgress("house", 1);
     }
 
     [ContextMenu("AchUpdate")]
-    public void AchUpdate() {
+    public void AchUpdate()
+    {
         AchievementManager.instance.AddAchievementProgress("zone", 1);
     }
 
