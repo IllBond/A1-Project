@@ -291,20 +291,24 @@ public class FirebaseManager : MonoBehaviour
         }
         else
         {
-            //Compare firebase with player prefs
-            ExperienceHolder.value = Convert.ToSingle(snapshot.Child(_dbExpField).Value ?? 0f);
-            SaveGameData playerPrefsData = SaveManager.LoadData("save.gamesave");
+            CompareFirebaseWithPlayerPrefs(snapshot);
+        }
+    }
 
-            if (playerPrefsData == null)
-            {
-                Debug.LogError("PlayerPrefs is null");
-                yield break;
-            }
+    private async void CompareFirebaseWithPlayerPrefs(DataSnapshot dataSnapshot)
+    {
+        ExperienceHolder.value = Convert.ToSingle(dataSnapshot.Child(_dbExpField).Value ?? 0f);
+        SaveGameData playerPrefsData = await SaveManager.LoadData("save.gamesave");
 
-            if (ExperienceHolder.value < playerPrefsData.exp)
-            {
-                ExperienceHolder.value = playerPrefsData.exp;
-            }
+        if (playerPrefsData == null)
+        {
+            Debug.LogError("PlayerPrefs is null");
+            return;
+        }
+
+        if (ExperienceHolder.value < playerPrefsData.exp)
+        {
+            ExperienceHolder.value = playerPrefsData.exp;
         }
     }
 

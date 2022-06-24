@@ -91,7 +91,7 @@ public class DemoSceneController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(_currentCanvas == _pauseCanvas)
+            if (_currentCanvas == _pauseCanvas)
             {
                 ContinueGame();
                 return;

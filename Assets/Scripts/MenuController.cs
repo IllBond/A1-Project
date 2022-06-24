@@ -14,54 +14,60 @@ public class MenuController : MonoBehaviour
 
     [SerializeField] private GameObject BuildButtons;
 
-    public void Restart() {
+    public void Restart()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }        
-    
-    public void OpenMenu() {
+    }
+
+    public void OpenMenu()
+    {
         SceneManager.LoadScene(0);
-    }    
-    
-    public void Pause() {
+    }
+
+    public void Pause()
+    {
         pauseButton.SetActive(false);
         menuBlock.SetActive(true);
         BuildButtons.SetActive(false);
         Time.timeScale = 0;
     }
 
-    public void Continue() {
+    public void Continue()
+    {
         pauseButton.SetActive(true);
         menuBlock.SetActive(false);
         BuildButtons.SetActive(true);
         Time.timeScale = 1;
     }
-    
 
-    public void SoundOn() {
+
+    public void SoundOn()
+    {
         soundOn.SetActive(true);
         soundOff.SetActive(false);
     }
-        
 
-    public void SoundOff() {
+
+    public void SoundOff()
+    {
         soundOn.SetActive(false);
         soundOff.SetActive(true);
-    }        
+    }
 
-    public void MusicOn() {
+    public void MusicOn()
+    {
         musicOn.SetActive(true);
         musicOff.SetActive(false);
     }
 
-    public void MusicOff() {
+    public void MusicOff()
+    {
         musicOn.SetActive(false);
         musicOff.SetActive(true);
     }
 
-    public void Info() {
+    public void Info()
+    {
         Application.OpenURL("https://a1-security.com/");
     }
-
-
-
 }

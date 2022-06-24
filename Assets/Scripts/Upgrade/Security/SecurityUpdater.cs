@@ -1,3 +1,4 @@
+using Helpers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -22,8 +23,8 @@ public class SecurityUpdater : MonoBehaviour
     [Header("House Info")]
     [Space]
     [SerializeField] private Text _curentCars;
-    [SerializeField] private Text _allCars;    
-    
+    [SerializeField] private Text _allCars;
+
     [Header("House Info")]
     [Space]
     [SerializeField] private Text _house;
@@ -56,14 +57,15 @@ public class SecurityUpdater : MonoBehaviour
     }
 
 
-    private void SetCountHouses() {
+    private async void SetCountHouses()
+    {
         TargetsManager.Instance.countUpdate = 0;
         foreach (var item in TargetsManager.Instance.houses)
         {
-            if (item.upg_camera || item.upg_zabor_or_signalization)
+            await AsyncHelper.Delay(() =>
             {
-                TargetsManager.Instance.countUpdate++;
-            }      
+                if (item.upg_camera || item.upg_zabor_or_signalization) TargetsManager.Instance.countUpdate++;
+            });
         }
 
         _house.text = TargetsManager.Instance.countUpdate.ToString();
@@ -82,9 +84,10 @@ public class SecurityUpdater : MonoBehaviour
             {
                 checkerExpertReload = true;
                 timer.text = "" + i;
-                
+
             }
-            else {
+            else
+            {
 
                 if (checkerExpertReload == true)
                 {
@@ -93,15 +96,15 @@ public class SecurityUpdater : MonoBehaviour
                     timer.text = "";
                     checkerExpertReload = false;
                 }
-        
-            } 
+
+            }
         }
 
 
 
         if (Input.GetButtonDown(_mouseButton))
         {
-        
+
 
             if (EventSystem.current.IsPointerOverGameObject(0)) return;
             if (EventSystem.current.IsPointerOverGameObject()) return;
@@ -154,14 +157,12 @@ public class SecurityUpdater : MonoBehaviour
         _currentSecurity.OutlineOn();
         _houseInfo.SetActive(true);
         SetDataToUi();
-
-
     }
 
     private void CloseUI()
-    { 
+    {
         _currentSecurity?.OutlineOff();
-/*        _currentSecurity = null;*/
+        /*        _currentSecurity = null;*/
         _houseInfo.SetActive(false);
         _upgradeMenu.SetActive(false);
         isMove = false;
@@ -198,8 +199,6 @@ public class SecurityUpdater : MonoBehaviour
         _updateButton_Radio.GetComponent<EventTrigger>().enabled = true;
         _updateButton_Flesher.GetComponent<ButtonSize>().enabled = true;
         _updateButton_Flesher.GetComponent<EventTrigger>().enabled = true;
-
-
     }
 
 
@@ -221,7 +220,7 @@ public class SecurityUpdater : MonoBehaviour
             _updateButton_MoreCar.GetComponent<ButtonSize>().enabled = false;
             _updateButton_MoreCar.GetComponent<EventTrigger>().enabled = false;
         }
- 
+
         if (_currentSecurity.upg_teach)
         {
             _iconTeach.SetActive(true);
@@ -261,8 +260,6 @@ public class SecurityUpdater : MonoBehaviour
             _updateButton_Flesher.GetComponent<ButtonSize>().enabled = false;
             _updateButton_Flesher.GetComponent<EventTrigger>().enabled = false;
         }
- 
-
     }
 
     public void OpenUpgradeMenu()

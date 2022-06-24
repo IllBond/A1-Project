@@ -13,14 +13,9 @@ public class ReturningState : StateSecurity
     public override void Enter()
     {
         character.tartgetHouse._house.securityProtected = false;
-      //  MainPlayer.Instance.PoliceCarState = "Возвращаюсь на базу";
 
-        
-       
-        //character.tartgetHouse._house.security = null;
         character.pathMover.StartMove();
         character.pathMover._navMeshAgent.destination = factoriesSecurity._spawnPoint.transform.position;
-        //stateMachine.ChangeState(character.moving);
     }
 
     public override void HandleInput()
@@ -36,13 +31,9 @@ public class ReturningState : StateSecurity
             stoped = true;
             character.pathMover.StopMove();
             character.Escape();
-
         }
 
     }
-
-   // character.Escape();
-
 
     public override void Exit()
     {

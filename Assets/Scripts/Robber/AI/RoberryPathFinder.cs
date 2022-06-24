@@ -20,11 +20,12 @@ public class RoberryPathFinder : MonoBehaviour
 
 
 
-    public void Move() {
+    public void Move()
+    {
         _navMeshAgent.destination = movePositionHouse.transformForPathFinder.position;
         var dist1 = Vector3.Distance(movePositionHouse.transformForPathFinder.position, transform.position);
         var dist2 = movePositionHouse.security ? Vector3.Distance(movePositionHouse.security.GetComponent<Transform>().position, transform.position) : 555f;
-      
+
         if ((dist1 < _rangeToTargetPoint && !isRobbies) || (dist2 < 4f && movePositionHouse.security.isStoped && !isRobbies && movePositionHouse.securityProtected))
         {
             _navMeshAgent.isStopped = true;
@@ -32,13 +33,14 @@ public class RoberryPathFinder : MonoBehaviour
         }
     }
 
-    public void SetTarget(House target) {
+    public void SetTarget(House target)
+    {
         isStartMove = true;
         movePositionHouse = target;
-        movePositionHouse.houseRob = gameObject.GetComponent<NavMeshAgent>() ;
+        movePositionHouse.houseRob = gameObject.GetComponent<NavMeshAgent>();
     }
-    
-    
+
+
 
     private void OnDrawGizmos()
     {
@@ -48,7 +50,7 @@ public class RoberryPathFinder : MonoBehaviour
             for (int i = 0; i < path.corners.Length - 1; i++)
             {
                 Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
-            } 
+            }
         }
     }
 }

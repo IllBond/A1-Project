@@ -6,16 +6,19 @@ public class TargetPont : MonoBehaviour
     [SerializeField] public House _house;
 
     [ContextMenu("VfxOn")]
-    public void VfxOn() {
+    public void VfxOn()
+    {
         _vfx.SetActive(true);
     }
 
     [ContextMenu("VfxOff")]
-    public void VfxOff() {
+    public void VfxOff()
+    {
         _vfx.SetActive(false);
     }
 
-    public void SetParentHouse(House house) {
+    public void SetParentHouse(House house)
+    {
         _house = house;
     }
 }

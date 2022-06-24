@@ -25,12 +25,14 @@ namespace BGGames.Core
             }
         }
 
-        public virtual void Update() { 
-        
-        }       
-        
-        public virtual void Start() { 
-        
+        public virtual void Update()
+        {
+
+        }
+
+        public virtual void Start()
+        {
+
         }
     }
 }

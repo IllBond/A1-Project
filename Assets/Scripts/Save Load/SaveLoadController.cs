@@ -1,3 +1,4 @@
+using Helpers;
 using UnityEngine;
 
 
@@ -13,22 +14,12 @@ public class SaveLoadController : MonoBehaviour
     private static TargetsManager targetsManager;
 
     [ContextMenu("Save")]
-    private static void SaveGame() {
+    private async static void SaveGame() {
         mainPlayer = MainPlayer.Instance;
         targetsManager = TargetsManager.Instance;
-        SaveManager.SaveData(mainPlayer, targetsManager, loadName);
+        await SaveManager.SaveData(mainPlayer, targetsManager, loadName);
     }
 
-    /*    IEnumerator SaveTimer() {
-            while (true)
-            {
-                yield return new WaitForSeconds(5);
-                //Debug.Log("Сохранил игру");
-                SaveGame();
-            }
-        }*/
-
-    
     private void Awake()
     {
         loadName = baseLoadNamel;
@@ -49,6 +40,7 @@ public class SaveLoadController : MonoBehaviour
         SetDataFromSave();
     }
 
+#if UNITY_STANDALONE
     private void Update()
     {
 
@@ -63,12 +55,12 @@ public class SaveLoadController : MonoBehaviour
             DeleteSaves();
             MainPlayer.Instance.ShowMessage("Сброс сохранений");
         }
-
     }
+#endif
 
-    public void SetDataFromSave()
+    public async void SetDataFromSave()
     {
-        SaveGameData data = SaveManager.LoadData(loadName);
+        SaveGameData data = await SaveManager.LoadData(loadName);
        
         if (data == null) return;
 
@@ -90,8 +82,11 @@ public class SaveLoadController : MonoBehaviour
 
         for (int i = 0; i < TargetsManager.Instance.houses.Count; i++)
         {
-            TargetsManager.Instance.houses[i].upg_zabor_or_signalization = data.housesState[i].upg_zabor_or_signalization;
-            TargetsManager.Instance.houses[i].upg_camera = data.housesState[i].upg_camera;
+            await AsyncHelper.Delay(() =>
+            {
+                TargetsManager.Instance.houses[i].upg_zabor_or_signalization = data.housesState[i].upg_zabor_or_signalization;
+                TargetsManager.Instance.houses[i].upg_camera = data.housesState[i].upg_camera;
+            });
         }
     }
 

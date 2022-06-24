@@ -8,12 +8,6 @@ public class MetricaVal : MonoBehaviour
     public Slider slider;
     public Text val;
 
-    
-/*    public void SetValFromGame(float val) {
-        value = (float)Math.Round(val, 1);
-        slider.value = value;
-    }
-*/
     void Awake()
     {
         value = slider.value;
@@ -21,8 +15,8 @@ public class MetricaVal : MonoBehaviour
         slider.onValueChanged.AddListener(delegate { SetValSlider(); });
     }
 
-    public void SetValSlider() {
-
+    public void SetValSlider()
+    {
         value = (float)Math.Round(slider.value, 1);
         slider.value = value;
         val.text = value.ToString();

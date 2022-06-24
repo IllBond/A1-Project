@@ -1,4 +1,4 @@
-public abstract class StateSecurity 
+public abstract class StateSecurity
 {
     protected SecurityController character;
     protected StateMachineSecurity stateMachine;

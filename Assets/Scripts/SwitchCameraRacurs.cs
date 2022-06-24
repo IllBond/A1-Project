@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class SwitchCameraRacurs : MonoBehaviour
 {
     private Quaternion _viewRacurs;
@@ -12,12 +11,10 @@ public class SwitchCameraRacurs : MonoBehaviour
     [SerializeField] private bool _isSwitch;
     [SerializeField] private bool _isFirstCLock;
 
-    [SerializeField]  private float SwichSpeed = 2;
+    [SerializeField] private float SwichSpeed = 2;
 
     [SerializeField] private GameObject ButtonBuildMode;
     [SerializeField] private GameObject ButtonViewMode;
-
-
 
     void Start()
     {
@@ -26,7 +23,8 @@ public class SwitchCameraRacurs : MonoBehaviour
     }
 
 
-    public void SetBuildMode() {
+    public void SetBuildMode()
+    {
         ButtonBuildMode?.SetActive(false);
         ButtonViewMode?.SetActive(true);
         TargetsManager.Instance.isBuildMode = true;
@@ -37,7 +35,8 @@ public class SwitchCameraRacurs : MonoBehaviour
     }
 
 
-    public void SetViewMode() {
+    public void SetViewMode()
+    {
         ButtonBuildMode?.SetActive(true);
         ButtonViewMode?.SetActive(false);
         TargetsManager.Instance.isBuildMode = false;
@@ -49,54 +48,50 @@ public class SwitchCameraRacurs : MonoBehaviour
 
     void Update()
     {
-        if (TargetsManager.Instance.isBuildMode && _isSwitch)
+        if(_isSwitch)
         {
-
-            if (_camera.transform.localRotation == _buildRacurs)
-            {
-                _isSwitch = false;
-                return;
-            }
-
-            if (_camera.transform.localRotation != _buildRacurs)
-            {
-                _elapsedTime += Time.deltaTime;
-                _camera.transform.localRotation = Quaternion.Lerp(_camera.transform.localRotation, _buildRacurs, _elapsedTime * SwichSpeed / 10);
-                if (TargetsManager.Instance.factoriesSecurity != null)
-                {
-                    var carPos = TargetsManager.Instance.factoriesSecurity.transform.position;
-                    _camera.transform.position = Vector3.Lerp(_camera.transform.position, new Vector3(carPos.x, _camera.transform.position.y, carPos.z), _elapsedTime * SwichSpeed / 10);
-                }
-               
-            }
-
+            if (TargetsManager.Instance.isBuildMode) TrySwithToTopDownMode(); else TrySwithToBuildMode();
         }
+    }
 
-        if (!TargetsManager.Instance.isBuildMode && _isSwitch)
+    private void TrySwithToBuildMode()
+    {
+        if (_camera.transform.localRotation == _viewRacurs)
         {
-            if (_camera.transform.localRotation == _viewRacurs)
+            _isSwitch = false;
+            if (_isFirstCLock)
             {
-                _isSwitch = false;
-                if (_isFirstCLock)
-                {
-                    Time.timeScale = 1;
-                    Time.timeScale = 0;
-                }
-                return;
+                Time.timeScale = 1;
+                Time.timeScale = 0;
             }
-
-            if (_camera.transform.localRotation != _viewRacurs)
-            {
-                _elapsedTime += Time.deltaTime;
-                _camera.transform.localRotation = Quaternion.Lerp(_camera.transform.localRotation, _viewRacurs, _elapsedTime * SwichSpeed / 10);
-                if (TargetsManager.Instance.factoriesSecurity != null) { 
-                    var carPos = TargetsManager.Instance.factoriesSecurity.transform.position;
-                    _camera.transform.position = Vector3.Lerp(_camera.transform.position, new Vector3(carPos.x-25, _camera.transform.position.y, carPos.z+25), _elapsedTime * SwichSpeed / 10);
-                }
-            }
-           
         }
+        else
+        {
+            _elapsedTime += Time.deltaTime;
+            _camera.transform.localRotation = Quaternion.Lerp(_camera.transform.localRotation, _viewRacurs, _elapsedTime * SwichSpeed / 10);
+            if (TargetsManager.Instance.factoriesSecurity != null)
+            {
+                var carPos = TargetsManager.Instance.factoriesSecurity.transform.position;
+                _camera.transform.position = Vector3.Lerp(_camera.transform.position, new Vector3(carPos.x - 25, _camera.transform.position.y, carPos.z + 25), _elapsedTime * SwichSpeed / 10);
+            }
+        }
+    }
 
-
+    private void TrySwithToTopDownMode()
+    {
+        if (_camera.transform.localRotation == _buildRacurs)
+        {
+            _isSwitch = false;
+        }
+        else
+        {
+            _elapsedTime += Time.deltaTime;
+            _camera.transform.localRotation = Quaternion.Lerp(_camera.transform.localRotation, _buildRacurs, _elapsedTime * SwichSpeed / 10);
+            if (TargetsManager.Instance.factoriesSecurity != null)
+            {
+                var carPos = TargetsManager.Instance.factoriesSecurity.transform.position;
+                _camera.transform.position = Vector3.Lerp(_camera.transform.position, new Vector3(carPos.x, _camera.transform.position.y, carPos.z), _elapsedTime * SwichSpeed / 10);
+            }
+        }
     }
 }

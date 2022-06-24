@@ -1,5 +1,4 @@
 ﻿using Helpers;
-using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -151,16 +150,18 @@ public class UIManager : MonoBehaviour
     private bool _isAnimating = false;
     private async Task LoadAnim(int delay)
     {
+        await AsyncHelper.DelayAndDo(delay);
+
         if (_isAnimating == false)
         {
             _isAnimating = true;
-            await AsyncHelper.DelayAndDo(delay, () => { SetLoadingText(); _isAnimating = false; });
+            SetLoadingText(); _isAnimating = false;
         }
     }
 
     private async void LoadSceneC(string sceneName)
     {
-        await AsyncHelper.Delay( async () =>
+        await AsyncHelper.Delay(async () =>
         {
             ResetLoadingText();
             load.SetActive(true);

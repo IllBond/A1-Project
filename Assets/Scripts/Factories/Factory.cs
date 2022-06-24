@@ -10,56 +10,47 @@ public class Factory : MonoBehaviour
     [SerializeField] private float minDistance = 10;
     private int _lastSpawnPoint = -1;
 
-    [SerializeField] [Range(-1, 2)] private int _spawnOnly = -1;
+    [SerializeField][Range(-1, 2)] private int _spawnOnly = -1;
 
-    private int GetRandomIndex(int countItems) {
+    private int GetRandomIndex(int countItems)
+    {
         if (countItems <= 0) return 0;
         return Random.Range(0, countItems);
     }
 
-    private int GetRandomSpawnIndex() {
+    private int GetRandomSpawnIndex()
+    {
         int index = GetRandomIndex(TargetsManager.Instance.robberSpawnPositions.Count);
         if (index == _lastSpawnPoint)
         {
             return GetRandomSpawnIndex();
         }
-        else {
+        else
+        {
             return index;
         }
     }
 
 
-    public void SpawnRubbers() {
-/*        int carsLeft = GameManager.Instance.carsCount - GameManager.Instance.currentCarsCount;
-*/
-
+    public void SpawnRubbers()
+    {
         int num = Random.Range(1, _maxSpawnAtATime + 1);
-        /*
-                if (*//*carsLeft < num ||*//* TargetsManager.Instance.robberTargetPositions.Count < num || TargetsManager.Instance.robberSpawnPositions.Count < num ) 
-                {
-                    num = 1;
-                }*/
 
         if (TargetsManager.Instance.robberTargetPositions.Count < num)
         {
             return;
         }
 
-        for (int i = 0; i < num ; i++)
+        for (int i = 0; i < num; i++)
         {
             SpawnOnceRubber();
         }
     }
 
-    private void SpawnOnceRubber() {
+    private void SpawnOnceRubber()
+    {
         int randomSpawnIndex = GetRandomSpawnIndex();
         Transform spawnPointTransform = TargetsManager.Instance.robberSpawnPositions[randomSpawnIndex].transform;
-
-        // if (TargetsManager.Instance.robberTargetPositions.Count == 0)
-        // {
-        //     Debug.Log("Spawn skipped. No targets to rob.");
-        //     return;
-        // }
 
         int randomTargetIndex = GetRandomIndex(TargetsManager.Instance.robberTargetPositions.Count);
         House randomHouse = TargetsManager.Instance.robberTargetPositions[randomTargetIndex];
@@ -97,10 +88,11 @@ public class Factory : MonoBehaviour
             {
                 i = Random.Range(0, 2);
             }
-            else {
+            else
+            {
                 i = _spawnOnly;
             }
-               
+
             if (i == 0)
             {
                 car = Instantiate(_car, spawnPointTransform.position, spawnPointTransform.rotation);
@@ -112,7 +104,8 @@ public class Factory : MonoBehaviour
                 car.GetComponent<RoberryPathFinder>().SetTarget(randomHouse);
             }
         }
-        else {
+        else
+        {
             int i;
             if (_spawnOnly == -1)
             {
@@ -142,7 +135,7 @@ public class Factory : MonoBehaviour
 
         TargetsManager.Instance.robberTargetPositions.Remove(randomHouse);
         TargetsManager.Instance.robbersInLevel.Add(car);
-        
+
         GameManager.Instance.currentCarsCount++;
     }
 

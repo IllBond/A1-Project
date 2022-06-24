@@ -10,8 +10,9 @@ public class House : MonoBehaviour
     [Header("Main")]
     [SerializeField] public bool _isAHouse; // Дом или бизнес здание
     [SerializeField] public GameObject _targetPoint;
-    
-    [Header("Canvas")][Space]
+
+    [Header("Canvas")]
+    [Space]
 
     public GameObject marker;
 
@@ -61,13 +62,14 @@ public class House : MonoBehaviour
     public bool upg_camera;
 
 
-    public void SetSecurityProtected() {
+    public void SetSecurityProtected()
+    {
         securityProtected = true;
         marker.GetComponent<UITimer>().child.HideImage(false);
     }
 
 
-    
+
     public void Awake()
     {
         _property = _maxProperty;
@@ -89,33 +91,10 @@ public class House : MonoBehaviour
         marker.GetComponent<Canvas>().worldCamera = Camera.main;
         _vfx.SetParentHouse(this);
         _outline = GetComponent<Outline>();
-        //StartCoroutine(CheckUpdatePossible());
     }
 
-/*    IEnumerator CheckUpdatePossible() {
-        while (true)
-        {
-            yield return new WaitForSeconds(1);
-            if (rob || going_to_rob || securityProtected || (upg_zabor_or_signalization && upg_camera) || MainPlayer.Instance.Money < 100 )
-            {
-                isUpdate.SetActive(false);
-            }
-            else
-            {
-                isUpdate.SetActive(true);
-            }
-        }
-    }*/
-
-    private void Update() {
-/*
-        if (Input.GetKeyDown("alt") && Input.GetKeyDown("a") && Input.GetKeyDown("m"))
-        {
-            MainPlayer.Instance.Money = 500;
-            MainPlayer.Instance.ShowMessage("Сброс сохранений");
-        }
-*/
-
+    private void Update()
+    {
         if (Metric.Instance.isOnMetric)
         {
             if (_maxProperty != Metric.Instance.timeRob.GetComponent<MetricaVal>().value)
@@ -123,7 +102,7 @@ public class House : MonoBehaviour
                 _maxProperty = Metric.Instance.timeRob.GetComponent<MetricaVal>().value;
                 _property = _maxProperty;
             }
-           
+
         }
         if (!_checkUpdate)
         {
@@ -171,7 +150,8 @@ public class House : MonoBehaviour
         }
     }
 
-    public bool UpgradeHouse(int type) {
+    public bool UpgradeHouse(int type)
+    {
         switch (type)
         {
             case 1:
@@ -189,7 +169,8 @@ public class House : MonoBehaviour
 
 
     // ### Updates
-    public void AchChecker() {
+    public void AchChecker()
+    {
         if (upg_zabor_or_signalization && upg_camera)
         {
 
@@ -201,20 +182,22 @@ public class House : MonoBehaviour
                     {
                         break;
                     }
-                    else {
+                    else
+                    {
                         AchivemntController.Instance.AchUpdate();
                         return;
                     }
                 }
 
-                
+
             }
 
             AchivemntController.Instance.AchAddUpdateHome();
         }
     }
 
-    private bool UpgradeTime() {
+    private bool UpgradeTime()
+    {
         int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateSignal.GetComponent<MetricaVal>().value : 100);
 
         if (MainPlayer.Instance.Money - price >= 0)
@@ -239,7 +222,8 @@ public class House : MonoBehaviour
             }
 
         }
-        else {
+        else
+        {
 
             MainPlayer.Instance.ShowMessage("Не хватает денег. Нужно " + price);
             return false;
@@ -247,20 +231,23 @@ public class House : MonoBehaviour
     }
 
 
-    private void CheckUpgradeTime() {
+    private void CheckUpgradeTime()
+    {
         MaxPropert = 100;
         if (_isAHouse)
         {
             zabor.SetActive(true);
         }
-        else {
+        else
+        {
             signalParticle.SetActive(true);
         }
     }
 
 
 
-    private bool UpgradeCamera() {
+    private bool UpgradeCamera()
+    {
         int price = (int)(Metric.Instance.isOnMetric ? Metric.Instance.priceUpdateCamera.GetComponent<MetricaVal>().value : 150);
 
         if (MainPlayer.Instance.Money - price >= 0)
@@ -293,18 +280,21 @@ public class House : MonoBehaviour
 
 
 
-    public void OutlineOn() {
+    public void OutlineOn()
+    {
         _outline.enabled = true;
     }
 
-    public void OutlineOff() {
+    public void OutlineOff()
+    {
         //_selectionOutlineController.ClearTarget();
         _outline.enabled = false;
     }
 
 
 
-    public void StartRobbery() {
+    public void StartRobbery()
+    {
         _vfx.VfxOn();
         signalWarning.SetActive(true);
         marker.SetActive(true);
@@ -322,7 +312,8 @@ public class House : MonoBehaviour
     }
 
 
-    public void Rob() {
+    public void Rob()
+    {
         rob = true;
     }
 
@@ -336,14 +327,16 @@ public class House : MonoBehaviour
                 firebase.UpdateFirebaseUserData();
             }
         }
-        else {
+        else
+        {
             Debug.Log("Рекорд побит, но вы не авторизованы");
         }
 
     }
 
     [ContextMenu("ProtectionSucces")]
-    public void ProtectionSucces() {
+    public void ProtectionSucces()
+    {
         audioSource.PlayOneShot(succesAudio);
         ViewHousStatusParticle(successParticle);
         EndRobbery();
@@ -365,7 +358,8 @@ public class House : MonoBehaviour
     }
 
     [ContextMenu("ProtectionFailure")]
-    public void ProtectionFailure() {
+    public void ProtectionFailure()
+    {
         audioSource.PlayOneShot(failAudio);
         ViewHousStatusParticle(failParticle);
         EndRobbery();
@@ -377,15 +371,15 @@ public class House : MonoBehaviour
         float v = (Metric.Instance.isOnMetric ? -Metric.Instance.moneyAfterRob.GetComponent<MetricaVal>().value : -150) / (Metric.Instance.isOnMetric ? Metric.Instance.cameraValue.GetComponent<MetricaVal>().value : 2);
 
         // Сколько денег/опыта забереут
-        MainPlayer.Instance.Raiting = upg_camera ? c : Metric.Instance.isOnMetric ? -Metric.Instance.expBeforRob.GetComponent<MetricaVal>().value : -100; 
+        MainPlayer.Instance.Raiting = upg_camera ? c : Metric.Instance.isOnMetric ? -Metric.Instance.expBeforRob.GetComponent<MetricaVal>().value : -100;
         MainPlayer.Instance.Money = upg_camera ? v : Metric.Instance.isOnMetric ? -Metric.Instance.moneyAfterRob.GetComponent<MetricaVal>().value : -150;
-        
+
         TargetsManager.Instance.countUpdate = 0;
         SaveLoadController.SaveOut();
         //Тут считаем очки, прибавляем или отнимаем и сколько
     }
 
-    
+
     public void FakeSignalizationFailure()
     {
         audioSource.PlayOneShot(failAudio);
@@ -396,14 +390,14 @@ public class House : MonoBehaviour
         SaveLoadController.SaveOut();
     }
 
-    
+
     public void FakeSignalizationSucces()
     {
         audioSource.PlayOneShot(succesAudio);
         ViewHousStatusParticle(successParticle);
         EndRobbery();
         MainPlayer.Instance.Raiting = 25;
-        
+
         AddScoreToBase();
         MainPlayer.Instance.Money = 25;
         TargetsManager.Instance.countUpdate++;
@@ -414,26 +408,25 @@ public class House : MonoBehaviour
         SaveLoadController.SaveOut();
     }
 
-    public void ViewHousStatusParticle(GameObject item) {
+    public void ViewHousStatusParticle(GameObject item)
+    {
         StartCoroutine(ViewHousStatusCouratine(item));
     }
 
-    IEnumerator ViewHousStatusCouratine(GameObject item) {
+    IEnumerator ViewHousStatusCouratine(GameObject item)
+    {
         item.SetActive(true);
         yield return new WaitForSeconds(2);
         item.SetActive(false);
     }
 
 
-    public void ExpertDestroyAll() {
+    public void ExpertDestroyAll()
+    {
         OnCompleteRobbir?.Invoke();
         EndRobbery();
 
         MainPlayer.Instance.Message = "Эксперт прогнал грабителей";
         //Тут считаем очки, прибавляем или отнимаем и сколько
     }
-
-
-
-
 }

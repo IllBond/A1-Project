@@ -17,19 +17,19 @@ namespace Helpers
         [ContextMenu(nameof(DisableAllShadows))]
         public async void DisableAllShadows()
         {
-            await AsyncHelper.Delay(() =>
+            foreach (MeshRenderer meshRenderer in _meshRenderers)
             {
-                foreach (MeshRenderer meshRenderer in _meshRenderers) meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            });
+                await AsyncHelper.Delay(() => { meshRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; });
+            }
         }
 
         [ContextMenu(nameof(DisableAllRecieveShadows))]
         public async void DisableAllRecieveShadows()
         {
-            await AsyncHelper.Delay(() =>
+            foreach (MeshRenderer meshRenderer in _meshRenderers)
             {
-                foreach (MeshRenderer meshRenderer in _meshRenderers) meshRenderer.receiveShadows = false;
-            });
+                await AsyncHelper.Delay(() => { meshRenderer.receiveShadows = false; });
+            }
         }
     }
 }

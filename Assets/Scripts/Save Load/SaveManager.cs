@@ -1,22 +1,27 @@
-﻿using System.Runtime.Serialization.Formatters.Binary;
+﻿using Helpers;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public class SaveManager    
+public class SaveManager
 {
     //string filePath = Application.persistentDataPath + "/save.gamesave";
 
-    public static void SaveData(MainPlayer mainPlayer, TargetsManager targetsManager,  string saveName)
+    public async static Task SaveData(MainPlayer mainPlayer, TargetsManager targetsManager, string saveName)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        string filePath = Application.persistentDataPath + "/"+ saveName;
-        FileStream stream = new FileStream(filePath, FileMode.Create);
+        await AsyncHelper.Delay(() =>
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            string filePath = Application.persistentDataPath + "/" + saveName;
+            FileStream stream = new FileStream(filePath, FileMode.Create);
 
-        SaveGameData data = new SaveGameData(mainPlayer, targetsManager);
-        formatter.Serialize(stream, data);
-        stream.Close();
-    }    
-    
+            SaveGameData data = new SaveGameData(mainPlayer, targetsManager);
+            formatter.Serialize(stream, data);
+            stream.Close();
+        });
+    }
+
     public static void DeleteSave()
     {
         string[] files = Directory.GetFiles(Application.persistentDataPath, "*.gamesave");
@@ -24,10 +29,13 @@ public class SaveManager
         {
             File.Delete(item);
         }
-        
+
     }
 
-    public static SaveGameData LoadData(string saveName) {
+    public static async Task<SaveGameData> LoadData(string saveName)
+    {
+        await AsyncHelper.Delay();
+
         string filePath = Application.persistentDataPath + "/" + saveName;
         if (File.Exists(filePath))
         {
@@ -39,10 +47,10 @@ public class SaveManager
 
             return data;
         }
-        else {
+        else
+        {
             Debug.LogWarning("Нет файла для следующего пути пока не существует: " + filePath);
             return null;
         }
     }
-
 }

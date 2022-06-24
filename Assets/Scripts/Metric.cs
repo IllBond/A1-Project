@@ -46,16 +46,6 @@ public class Metric : SceneSingleton<Metric>
     [Space]
     [Space]
     public GameObject ButtonOpen;
-    /*    [Space]
-        [Space]
-        public GameObject Security;
-        [Space]
-        [Space]
-        public GameObject Rob1;
-        public GameObject Rob2;
-        public GameObject Rob3;*/
-
-    ///
 
     [SerializeField] private GameObject window;
 

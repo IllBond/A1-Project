@@ -34,9 +34,6 @@ public class SecurityMovingState : StateSecurity
             //stateMachine.ChangeState(character.waiting);
             stateMachine.ChangeState(character.detaining);
         }
-
-  
-        
     }
 
     public override void PhysicsUpdate()

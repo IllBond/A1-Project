@@ -18,9 +18,6 @@ public class SoundController : MonoBehaviour
     {
         prefAudio = PlayerPrefs.GetInt("Audio");
         prefMusic = PlayerPrefs.GetInt("Music");
-
-       // Debug.Log(prefAudio + " " + prefMusic);
-
     }
 
     private void Start()
@@ -33,7 +30,8 @@ public class SoundController : MonoBehaviour
             music.mute = false;
             iconMusicOff.SetActive(true);
         }
-        else {
+        else
+        {
 
             iconMusicOn.SetActive(true);
             music.mute = true;
@@ -44,7 +42,8 @@ public class SoundController : MonoBehaviour
             audio.mute = false;
             iconAudioOff.SetActive(true);
         }
-        else {
+        else
+        {
             iconAudioOn.SetActive(true);
             audio.mute = true;
         }
@@ -52,61 +51,65 @@ public class SoundController : MonoBehaviour
 
 
 
-    public void SwitchAudio() {
+    public void SwitchAudio()
+    {
         prefAudio = PlayerPrefs.GetInt("Audio");
         if (prefAudio == 0)
         {
 
             audio.mute = false;
-        } else {
+        }
+        else
+        {
             audio.Stop();
             audio.mute = true;
         }
     }
 
-    public void SwitchMusic() {
+    public void SwitchMusic()
+    {
         prefMusic = PlayerPrefs.GetInt("Music");
         if (prefMusic == 0)
         {
             music.Play();
             music.mute = false;
-        } else {
+        }
+        else
+        {
             music.Stop();
             music.mute = true;
         }
     }
 
-    public void EnableMusic() {
+    public void EnableMusic()
+    {
         iconMusicOn.SetActive(false);
         iconMusicOff.SetActive(true);
         PlayerPrefs.SetInt("Music", 0);
         SwitchMusic();
-    }    
-    
-    public void DisableMusic() {
+    }
+
+    public void DisableMusic()
+    {
         iconMusicOff.SetActive(false);
         iconMusicOn.SetActive(true);
         PlayerPrefs.SetInt("Music", 1);
         SwitchMusic();
     }
 
-    public void EnableAudio() {
+    public void EnableAudio()
+    {
         iconAudioOn.SetActive(false);
         iconAudioOff.SetActive(true);
         PlayerPrefs.SetInt("Audio", 0);
         SwitchAudio();
-    }    
-    
-    public void DisableAudio() {
+    }
+
+    public void DisableAudio()
+    {
         iconAudioOff.SetActive(false);
         iconAudioOn.SetActive(true);
         PlayerPrefs.SetInt("Audio", 1);
         SwitchAudio();
     }
-
-/*    private void Update()
-    {
-        Debug.Log(PlayerPrefs.GetInt("Music"));
-    }*/
-
 }

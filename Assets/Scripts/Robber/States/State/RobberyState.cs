@@ -20,29 +20,20 @@ public class RobberyState : State
     }
 
 
-    IEnumerator Wringer() {
+    IEnumerator Wringer()
+    {
         float val = 0;
         float time = 0;
         while (character.roberryPathFinder.movePositionHouse.Property > 0)
         {
-
-
-            //if (!character.roberryPathFinder.movePositionHouse.securityProtected) { 
- 
-                /*            float val = Mathf.Round(character.roberryPathFinder.movePositionHouse.upg_zabor_or_signalization ?
-                                character.factorPropertyperSecodn / 1.5f :
-                                character.factorPropertyperSecodn);     */
-
-
-                    
             val = Mathf.Round(character.roberryPathFinder.movePositionHouse.upg_zabor_or_signalization ?
                 character.factorPropertyperSecodn / (Metric.Instance.isOnMetric ? Metric.Instance.signalizationValue.GetComponent<MetricaVal>().value : 1.3f) :
                 character.factorPropertyperSecodn);
 
             time = Mathf.Round(character.roberryPathFinder.movePositionHouse.Property / val);
 
-            character.roberryPathFinder.movePositionHouse.marker.GetComponent<UITimer>().SetNewTime(""+ time, true);
-            character.roberryPathFinder.movePositionHouse.marker.GetComponent<UITimer>().SetText(""+  Mathf.Round(100 - (100 * character.roberryPathFinder.movePositionHouse.Property) / startVal) + " %", false);
+            character.roberryPathFinder.movePositionHouse.marker.GetComponent<UITimer>().SetNewTime("" + time, true);
+            character.roberryPathFinder.movePositionHouse.marker.GetComponent<UITimer>().SetText("" + Mathf.Round(100 - (100 * character.roberryPathFinder.movePositionHouse.Property) / startVal) + " %", false);
             yield return new WaitForSeconds(1);
 
             if (character.roberryPathFinder.movePositionHouse.moveProtected)
@@ -54,13 +45,11 @@ public class RobberyState : State
 
                 character.roberryPathFinder.movePositionHouse.Property = val;
             }
-            else {
-
+            else
+            {
                 character.roberryPathFinder.movePositionHouse.marker.GetComponent<UITimer>().SetBGText(false);
                 character.roberryPathFinder.movePositionHouse.marker.GetComponent<UITimer>().SetBG(false);
             }
-
-            
         }
     }
 
@@ -71,7 +60,7 @@ public class RobberyState : State
     }
 
     public override void HandleInput()
-    { 
+    {
     }
 
     public override void LogicUpdate()
@@ -86,7 +75,5 @@ public class RobberyState : State
         character.roberryPathFinder.movePositionHouse.OnCompleteRobbir -= EndRobbie;
         character.roberryPathFinder.movePositionHouse.marker.GetComponent<UITimer>().SetNewTime("", false);
         character.roberryPathFinder.movePositionHouse.marker.GetComponent<UITimer>().SetBGText(false);
-
-
     }
 }

@@ -80,7 +80,6 @@ public class SecurityController : MonoBehaviour
 
     private IEnumerator DrawPath()
     {
-
         int countRobb = TargetsManager.Instance.robbersInLevel.Count;
 
         if (countRobb < 0) yield break;
@@ -113,17 +112,11 @@ public class SecurityController : MonoBehaviour
                         tartgetHouse._house.SetSecurityProtected();
                         yield return new WaitForSeconds(0.1f);
                         pathCreator.StartMoveAutopilot(_points);
-
-                        //AutoPilotOn();
                     }
                     break;
                 }
             }
-
-            // Debug.Log(_targetForRadio == null);
         }
-
-
 
         if (_targetForRadio == null)
         {

@@ -14,9 +14,10 @@ public class SaveGameData
     public HouseState[] housesState;
 
 
-    public SaveGameData(MainPlayer mainPlayer, TargetsManager targetsManager) {
+    public SaveGameData(MainPlayer mainPlayer, TargetsManager targetsManager)
+    {
         money = mainPlayer.Money;
-        exp = mainPlayer.Raiting ;
+        exp = mainPlayer.Raiting;
 
 
         policeStates.upg_moreCar = TargetsManager.Instance.factoriesSecurity.upg_moreCar;

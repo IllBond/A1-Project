@@ -33,12 +33,13 @@ public class MainPlayer : GameSingleton<MainPlayer>
                 MoneyValue.text = "" + money;
                 return;
             }
-            money += value ;
+            money += value;
             MoneyValue.text = "" + money;
         }
     }
 
-    public void AddMoney() {
+    public void AddMoney()
+    {
         Money = 50;
         Debug.Log(Money);
     }
@@ -92,8 +93,8 @@ public class MainPlayer : GameSingleton<MainPlayer>
         base.Awake();
         UpPos = MessageWindow.position;
         DownPos = MessageWindowNewPos.position;
-    }    
-    
+    }
+
     public override void Start()
     {
         base.Start();
@@ -113,7 +114,7 @@ public class MainPlayer : GameSingleton<MainPlayer>
 
     IEnumerator SetMessage(string text)
     {
-        MessageWindow.position = UpPos; 
+        MessageWindow.position = UpPos;
         isDown = true;
         Message = text;
         messageText.text = "" + Message;

@@ -12,22 +12,26 @@ public class UITimer : MonoBehaviour
 
     public Window_QuestPointer child;
 
-    public void SetNewTime(string t, bool isRob) {
+    public void SetNewTime(string t, bool isRob)
+    {
         valTime.text = t.ToString();
         valTime.color = isRob ? Color.red : Color.white;
-    }    
-    
-    public void SetText(string t, bool isRob) {
+    }
+
+    public void SetText(string t, bool isRob)
+    {
         valText.text = t.ToString();
         valText.color = isRob ? Color.red : Color.white;
     }
 
-    public void SetBG(bool st) {
+    public void SetBG(bool st)
+    {
         bg.SetActive(st);
-    }   
-    
-    public void SetBGText(bool st) {
+    }
+
+    public void SetBGText(bool st)
+    {
         bgText.SetActive(st);
     }
-    
+
 }

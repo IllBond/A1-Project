@@ -71,8 +71,9 @@ public class RobberController : MonoBehaviour
                 meshRenderer.material.SetInt("_DstBlend", (int) UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
                 meshRenderer.material.EnableKeyword("_ALPHABLEND_ON");
                 meshRenderer.material.renderQueue = 3000;
+                yield return new WaitForEndOfFrame();
             }
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
         TargetsManager.Instance.robberTargetPositions.Add(roberryPathFinder.movePositionHouse);
         TargetsManager.Instance.robbersInLevel.Remove(gameObject);

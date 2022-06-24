@@ -4,7 +4,6 @@ public class StateMachineSecurity
 
     public void Initialize(StateSecurity startingState)
     {
-        
         CurrentState = startingState;
         startingState.Enter();
     }

@@ -103,7 +103,4 @@ public class HouseFader : MonoBehaviour
             material.renderQueue = 3000;
         }
     }
-
-    
-    
 }
